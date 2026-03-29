@@ -7,18 +7,18 @@ import { ChevronLeft, ChevronRight, SearchX, ChevronDown } from 'lucide-react';
 import { useSearch } from '@/context/SearchContext';
 
 const baseProducts = [
-  { title: 'Phone Holder Sakti', price: 29.90, rating: 5.0, reviews: '1.2k', category: 'Mobile', imageSeed: 'holder', brand: 'Anker' },
-  { title: 'Headsound', price: 12.00, rating: 5.0, reviews: '1.2k', category: 'Audio', imageSeed: 'headphones', brand: 'Sony' },
-  { title: 'Adudu Cleaner', price: 29.90, rating: 4.4, reviews: '1k', category: 'Home', imageSeed: 'robot-vacuum', brand: 'Samsung' },
-  { title: 'CCTV Maling', price: 50.00, rating: 4.8, reviews: '120', category: 'Home', imageSeed: 'cctv', brand: 'Logitech' },
-  { title: 'Stuffus Peker 32', price: 9.90, rating: 5.0, reviews: '1.2k', category: 'Audio', imageSeed: 'speaker', brand: 'Bose' },
-  { title: 'Stuffus R175', price: 34.10, rating: 4.8, reviews: '2.4k', category: 'Audio', imageSeed: 'earbuds', brand: 'Samsung' },
-  { title: 'Smart Plug', price: 15.00, rating: 4.5, reviews: '800', category: 'Home', imageSeed: 'smart-plug', brand: 'Anker' },
-  { title: 'USB-C Hub', price: 45.00, rating: 4.7, reviews: '3.1k', category: 'Accessory', imageSeed: 'usb-hub', brand: 'Anker' },
-  { title: '1TB SSD External', price: 89.90, rating: 4.9, reviews: '5k', category: 'Accessory', imageSeed: 'ssd', brand: 'Samsung' },
-  { title: 'MicroSD 256GB', price: 25.00, rating: 4.6, reviews: '10k', category: 'Accessory', imageSeed: 'microsd', brand: 'Samsung' },
-  { title: 'Wireless Charger', price: 22.50, rating: 4.3, reviews: '2k', category: 'Mobile', imageSeed: 'wireless-charger', brand: 'Apple' },
-  { title: 'Bluetooth Turntable', price: 150.00, rating: 4.8, reviews: '450', category: 'Audio', imageSeed: 'turntable', brand: 'Sony' },
+  { title: 'iPhone 15 Pro Max', price: 1199.00, rating: 4.9, reviews: '12k', category: 'Mobile', imageSeed: 'iphone', brand: 'Apple' },
+  { title: 'Galaxy S24 Ultra', price: 1299.00, rating: 4.8, reviews: '8k', category: 'Mobile', imageSeed: 'galaxy', brand: 'Samsung' },
+  { title: 'AirPods Pro 2', price: 249.00, rating: 4.9, reviews: '25k', category: 'Audio', imageSeed: 'airpods', brand: 'Apple' },
+  { title: 'Sony WH-1000XM5', price: 398.00, rating: 4.8, reviews: '15k', category: 'Audio', imageSeed: 'headphones', brand: 'Sony' },
+  { title: 'Silicone MagSafe Case', price: 49.00, rating: 4.5, reviews: '3k', category: 'Cases', imageSeed: 'phone-case', brand: 'Apple' },
+  { title: 'Rugged Armor Case', price: 19.99, rating: 4.7, reviews: '10k', category: 'Cases', imageSeed: 'rugged-case', brand: 'Anker' },
+  { title: 'Anker 735 Charger', price: 59.99, rating: 4.8, reviews: '5k', category: 'Chargers', imageSeed: 'charger', brand: 'Anker' },
+  { title: 'USB-C to USB-C Cable', price: 19.00, rating: 4.6, reviews: '8k', category: 'Chargers', imageSeed: 'cable', brand: 'Apple' },
+  { title: 'Apple Watch Series 9', price: 399.00, rating: 4.8, reviews: '10k', category: 'Wearables', imageSeed: 'smartwatch', brand: 'Apple' },
+  { title: 'Galaxy Watch 6', price: 299.00, rating: 4.6, reviews: '6k', category: 'Wearables', imageSeed: 'galaxy-watch', brand: 'Samsung' },
+  { title: 'Logitech MX Master 3S', price: 99.99, rating: 4.9, reviews: '18k', category: 'Accessory', imageSeed: 'mouse', brand: 'Logitech' },
+  { title: 'Smart Home Hub', price: 129.00, rating: 4.4, reviews: '2k', category: 'Home', imageSeed: 'smart-hub', brand: 'Samsung' },
 ];
 
 const allProducts = Array.from({ length: 240 }, (_, i) => {

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ChevronDown, ChevronUp, Folder, Home, Music, Smartphone, HardDrive, Sparkles, TrendingUp, Percent } from 'lucide-react';
+import { ChevronDown, ChevronUp, Folder, Home, Music, Smartphone, HardDrive, Sparkles, TrendingUp, Percent, Shield, Zap, Watch } from 'lucide-react';
 
 interface SidebarProps {
   activeCategory: string;
@@ -20,13 +20,16 @@ export default function Sidebar({
   onBrandChange,
   totalProducts 
 }: SidebarProps) {
-  const [isBrandsOpen, setIsBrandsOpen] = useState(false);
+  const [isBrandsOpen, setIsBrandsOpen] = useState(true);
 
   const categories = [
-    { id: 'Accessory', label: 'Accessory', icon: HardDrive },
-    { id: 'Audio', label: 'Audio', icon: Music },
-    { id: 'Mobile', label: 'Mobile', icon: Smartphone },
-    { id: 'Home', label: 'Home', icon: Home },
+    { id: 'Mobile', label: 'Mobile Phones', icon: Smartphone },
+    { id: 'Audio', label: 'Audio & TWS', icon: Music },
+    { id: 'Cases', label: 'Cases & Covers', icon: Shield },
+    { id: 'Chargers', label: 'Chargers & Cables', icon: Zap },
+    { id: 'Wearables', label: 'Smartwatches', icon: Watch },
+    { id: 'Accessory', label: 'Accessories', icon: HardDrive },
+    { id: 'Home', label: 'Smart Home', icon: Home },
   ];
 
   const badges = [

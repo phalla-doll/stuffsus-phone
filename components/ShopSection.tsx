@@ -140,7 +140,7 @@ export default function ShopSection() {
           <div className="flex items-center gap-2 w-full sm:w-auto justify-between sm:justify-end">
             <button 
               onClick={() => setIsMobileFiltersOpen(true)}
-              className="md:hidden flex items-center gap-2 px-4 py-2 bg-white border border-gray-200 rounded-full text-sm font-medium text-gray-700 hover:border-[#FF5E00] hover:text-[#FF5E00] transition-colors"
+              className="md:hidden flex items-center gap-2 px-4 py-3 bg-white border border-gray-200 rounded-full text-sm font-medium text-gray-700 hover:border-[#FF5E00] hover:text-[#FF5E00] transition-colors"
             >
               <SlidersHorizontal className="w-4 h-4" />
               Filters
@@ -152,7 +152,7 @@ export default function ShopSection() {
                   id="sort"
                   value={sortBy}
                   onChange={(e) => setSortBy(e.target.value)}
-                  className="appearance-none bg-white border border-gray-200 text-gray-900 text-sm rounded-full focus:ring-[#FF5E00] focus:border-[#FF5E00] block pl-4 pr-10 py-2 outline-none cursor-pointer transition-colors hover:border-gray-300"
+                  className="appearance-none bg-white border border-gray-200 text-gray-900 text-sm font-medium rounded-full focus:ring-[#FF5E00] focus:border-[#FF5E00] block pl-4 pr-10 py-3 outline-none cursor-pointer transition-colors hover:border-gray-300"
                 >
                   <option value="featured">Featured</option>
                   <option value="price-asc">Price: Low to High</option>

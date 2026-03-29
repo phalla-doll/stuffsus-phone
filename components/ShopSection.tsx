@@ -24,12 +24,14 @@ const baseProducts = [
 const allProducts = Array.from({ length: 240 }, (_, i) => {
   const base = baseProducts[i % baseProducts.length];
   const badges = ['New Arrival', 'Best Seller', 'Discount'];
+  const badge = badges[i % 3];
   return {
     ...base,
     id: i + 1,
     title: `${base.title} Gen ${Math.floor(i / baseProducts.length) + 1}`,
     imageSeed: `${base.imageSeed}-${i}`,
-    badge: badges[i % 3]
+    badge: badge,
+    originalPrice: badge === 'Discount' ? parseFloat((base.price * 1.25).toFixed(2)) : undefined
   };
 });
 

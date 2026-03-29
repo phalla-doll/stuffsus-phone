@@ -15,9 +15,10 @@ interface ProductCardProps {
   imageSeed: string;
   badge: string;
   isOutOfStock?: boolean;
+  originalPrice?: number;
 }
 
-export default function ProductCard({ id, title, price, rating, reviews, category, imageSeed, badge, isOutOfStock = false }: ProductCardProps) {
+export default function ProductCard({ id, title, price, rating, reviews, category, imageSeed, badge, isOutOfStock = false, originalPrice }: ProductCardProps) {
   const [isQuickViewOpen, setIsQuickViewOpen] = useState(false);
   const { addToCart } = useCart();
 
@@ -69,7 +70,16 @@ export default function ProductCard({ id, title, price, rating, reviews, categor
         <div className="flex flex-col gap-2 px-1">
           <div className="flex justify-between items-start gap-2">
             <h3 className="font-bold text-lg leading-tight text-gray-900">{title}</h3>
-            <span className="font-bold text-lg text-gray-900">${price.toFixed(2)}</span>
+            <div className="flex flex-col items-end shrink-0">
+              <span className={`font-bold text-lg ${originalPrice ? 'text-[#FF5E00]' : 'text-gray-900'}`}>
+                ${price.toFixed(2)}
+              </span>
+              {originalPrice && (
+                <span className="text-xs text-gray-400 line-through">
+                  ${originalPrice.toFixed(2)}
+                </span>
+              )}
+            </div>
           </div>
           <div className="flex items-center gap-1.5 text-sm text-gray-500">
             <Star className="w-4 h-4 fill-[#FF5E00] text-[#FF5E00]" />
@@ -199,7 +209,16 @@ export default function ProductCard({ id, title, price, rating, reviews, categor
               </div>
               
               <div className="mt-auto pt-6 md:pt-8 border-t border-gray-100">
-                <div className="text-3xl md:text-4xl font-black text-gray-900 mb-4 md:mb-6">${price.toFixed(2)}</div>
+                <div className="flex items-end gap-3 mb-4 md:mb-6">
+                  <div className={`text-3xl md:text-4xl font-black ${originalPrice ? 'text-[#FF5E00]' : 'text-gray-900'}`}>
+                    ${price.toFixed(2)}
+                  </div>
+                  {originalPrice && (
+                    <div className="text-lg md:text-xl font-medium text-gray-400 line-through mb-1 md:mb-1.5">
+                      ${originalPrice.toFixed(2)}
+                    </div>
+                  )}
+                </div>
                 <div className="flex gap-4">
                   <button 
                     onClick={handleAddToCart}

@@ -38,6 +38,7 @@ const ITEMS_PER_PAGE = 30;
 export default function ShopSection() {
   const [activeCategory, setActiveCategory] = useState('All');
   const [currentPage, setCurrentPage] = useState(1);
+  const [sortBy, setSortBy] = useState('featured');
   const { searchQuery, setSearchQuery } = useSearch();
 
   const filteredProducts = useMemo(() => {
@@ -55,13 +56,28 @@ export default function ShopSection() {
     return filtered;
   }, [activeCategory, searchQuery]);
 
-  // Reset pagination when search query changes
+  const sortedProducts = useMemo(() => {
+    const sorted = [...filteredProducts];
+    switch (sortBy) {
+      case 'price-asc':
+        return sorted.sort((a, b) => a.price - b.price);
+      case 'price-desc':
+        return sorted.sort((a, b) => b.price - a.price);
+      case 'rating-desc':
+        return sorted.sort((a, b) => b.rating - a.rating);
+      case 'featured':
+      default:
+        return sorted;
+    }
+  }, [filteredProducts, sortBy]);
+
+  // Reset pagination when search query or sort changes
   useEffect(() => {
     setCurrentPage(1);
-  }, [searchQuery]);
+  }, [searchQuery, sortBy]);
 
-  const totalPages = Math.ceil(filteredProducts.length / ITEMS_PER_PAGE);
-  const currentProducts = filteredProducts.slice(
+  const totalPages = Math.ceil(sortedProducts.length / ITEMS_PER_PAGE);
+  const currentProducts = sortedProducts.slice(
     (currentPage - 1) * ITEMS_PER_PAGE,
     currentPage * ITEMS_PER_PAGE
   );
@@ -79,6 +95,27 @@ export default function ShopSection() {
         totalProducts={allProducts.length}
       />
       <div className="flex-1 flex flex-col gap-12">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+          <h2 className="text-xl font-bold text-gray-900">
+            {activeCategory === 'All' ? 'All Products' : `${activeCategory} Products`}
+            <span className="text-gray-500 text-sm font-normal ml-2">({sortedProducts.length})</span>
+          </h2>
+          <div className="flex items-center gap-2">
+            <label htmlFor="sort" className="text-sm font-medium text-gray-500">Sort by:</label>
+            <select
+              id="sort"
+              value={sortBy}
+              onChange={(e) => setSortBy(e.target.value)}
+              className="bg-white border border-gray-200 text-gray-900 text-sm rounded-full focus:ring-[#FF5E00] focus:border-[#FF5E00] block px-4 py-2 outline-none cursor-pointer transition-colors hover:border-gray-300"
+            >
+              <option value="featured">Featured</option>
+              <option value="price-asc">Price: Low to High</option>
+              <option value="price-desc">Price: High to Low</option>
+              <option value="rating-desc">Highest Rated</option>
+            </select>
+          </div>
+        </div>
+
         {currentProducts.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-24 text-gray-400 gap-4 bg-white rounded-3xl border border-gray-100 shadow-sm">
             <SearchX className="w-16 h-16 opacity-20" />

@@ -32,7 +32,7 @@ export default function ProductCard({ id, title, price, rating, reviews, categor
     <>
       <div className="group flex flex-col gap-4 h-full">
         <div 
-          className="relative aspect-square rounded-3xl bg-[#EBEBEB] flex items-center justify-center overflow-hidden transition-transform group-hover:scale-[1.02] cursor-pointer shrink-0"
+          className="relative aspect-square rounded-3xl bg-[#EBEBEB] flex items-center justify-center overflow-hidden isolate transition-transform group-hover:scale-[1.02] cursor-pointer shrink-0"
           onClick={() => setIsQuickViewOpen(true)}
         >
           {!isOutOfStock && (

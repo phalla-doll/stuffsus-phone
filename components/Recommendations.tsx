@@ -27,10 +27,10 @@ export default function Recommendations() {
   };
 
   return (
-    <section className="px-8 mb-24">
-      <div className="flex items-end justify-between mb-8">
-        <h2 className="text-3xl font-bold text-gray-900">Explore our recomendations</h2>
-        <div className="flex items-center gap-3">
+    <section className="px-4 md:px-8 mb-16 md:mb-24">
+      <div className="flex items-end justify-between mb-6 md:mb-8">
+        <h2 className="text-2xl md:text-3xl font-bold text-gray-900">Explore our recomendations</h2>
+        <div className="hidden sm:flex items-center gap-3">
           <button 
             onClick={() => scroll('left')}
             className="w-10 h-10 rounded-full border border-gray-300 flex items-center justify-center text-gray-600 hover:border-[#FF5E00] hover:text-[#FF5E00] transition-colors"
@@ -47,11 +47,11 @@ export default function Recommendations() {
       </div>
       <div 
         ref={scrollContainerRef}
-        className="flex overflow-x-auto gap-6 pb-4 snap-x snap-mandatory hide-scrollbar"
+        className="flex overflow-x-auto gap-4 md:gap-6 pb-4 snap-x snap-mandatory hide-scrollbar -mx-4 px-4 md:mx-0 md:px-0"
         style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
       >
         {recommendations.map((product) => (
-          <div key={product.id} className="min-w-[280px] sm:min-w-[300px] lg:min-w-[calc(25%-1.125rem)] snap-start">
+          <div key={product.id} className="min-w-[260px] sm:min-w-[300px] lg:min-w-[calc(25%-1.125rem)] snap-start">
             <ProductCard {...product} />
           </div>
         ))}

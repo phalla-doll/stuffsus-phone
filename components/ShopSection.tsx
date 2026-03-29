@@ -3,7 +3,7 @@
 import { useState, useMemo, useEffect } from 'react';
 import Sidebar from './Sidebar';
 import ProductCard from './ProductCard';
-import { ChevronLeft, ChevronRight, SearchX, ChevronDown, Search } from 'lucide-react';
+import { ChevronLeft, ChevronRight, SearchX, ChevronDown, Search, SlidersHorizontal } from 'lucide-react';
 import { useSearch } from '@/context/SearchContext';
 
 const baseProducts = [
@@ -41,6 +41,7 @@ export default function ShopSection() {
   const [activeBrand, setActiveBrand] = useState('All');
   const [currentPage, setCurrentPage] = useState(1);
   const [sortBy, setSortBy] = useState('featured');
+  const [isMobileFiltersOpen, setIsMobileFiltersOpen] = useState(false);
   const { searchQuery, setSearchQuery } = useSearch();
 
   const filteredProducts = useMemo(() => {
@@ -95,10 +96,11 @@ export default function ShopSection() {
   const handleCategoryChange = (category: string) => {
     setActiveCategory(category);
     setCurrentPage(1);
+    setIsMobileFiltersOpen(false); // Close mobile filters on selection
   };
 
   return (
-    <section className="px-8 mb-24 flex flex-col md:flex-row gap-12">
+    <section className="px-4 md:px-8 mb-16 md:mb-24 flex flex-col md:flex-row gap-8 md:gap-12">
       <Sidebar 
         activeCategory={activeCategory} 
         onCategoryChange={handleCategoryChange} 
@@ -107,10 +109,12 @@ export default function ShopSection() {
         activeBrand={activeBrand}
         onBrandChange={setActiveBrand}
         totalProducts={allProducts.length}
+        isOpen={isMobileFiltersOpen}
+        onClose={() => setIsMobileFiltersOpen(false)}
       />
-      <div className="flex-1 flex flex-col gap-12">
+      <div className="flex-1 flex flex-col gap-6 md:gap-12">
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 w-full">
-          <div className="relative flex-1 max-w-md w-full">
+          <div className="relative flex-1 w-full sm:max-w-md">
             <div className="absolute inset-y-0 left-4 flex items-center pointer-events-none">
               <Search className="w-5 h-5 text-gray-400" />
             </div>
@@ -122,21 +126,30 @@ export default function ShopSection() {
               className="w-full pl-12 pr-4 py-3 rounded-full border border-gray-200 bg-white focus:outline-none focus:ring-2 focus:ring-[#FF5E00] focus:border-transparent transition-all text-sm font-medium text-gray-900"
             />
           </div>
-          <div className="flex items-center gap-2">
-            <label htmlFor="sort" className="text-sm font-medium text-gray-500">Sort by:</label>
-            <div className="relative">
-              <select
-                id="sort"
-                value={sortBy}
-                onChange={(e) => setSortBy(e.target.value)}
-                className="appearance-none bg-white border border-gray-200 text-gray-900 text-sm rounded-full focus:ring-[#FF5E00] focus:border-[#FF5E00] block pl-4 pr-10 py-2 outline-none cursor-pointer transition-colors hover:border-gray-300"
-              >
-                <option value="featured">Featured</option>
-                <option value="price-asc">Price: Low to High</option>
-                <option value="price-desc">Price: High to Low</option>
-                <option value="rating-desc">Highest Rated</option>
-              </select>
-              <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500 pointer-events-none" />
+          <div className="flex items-center gap-2 w-full sm:w-auto justify-between sm:justify-end">
+            <button 
+              onClick={() => setIsMobileFiltersOpen(true)}
+              className="md:hidden flex items-center gap-2 px-4 py-2 bg-white border border-gray-200 rounded-full text-sm font-medium text-gray-700 hover:border-[#FF5E00] hover:text-[#FF5E00] transition-colors"
+            >
+              <SlidersHorizontal className="w-4 h-4" />
+              Filters
+            </button>
+            <div className="flex items-center gap-2">
+              <label htmlFor="sort" className="hidden sm:block text-sm font-medium text-gray-500">Sort by:</label>
+              <div className="relative">
+                <select
+                  id="sort"
+                  value={sortBy}
+                  onChange={(e) => setSortBy(e.target.value)}
+                  className="appearance-none bg-white border border-gray-200 text-gray-900 text-sm rounded-full focus:ring-[#FF5E00] focus:border-[#FF5E00] block pl-4 pr-10 py-2 outline-none cursor-pointer transition-colors hover:border-gray-300"
+                >
+                  <option value="featured">Featured</option>
+                  <option value="price-asc">Price: Low to High</option>
+                  <option value="price-desc">Price: High to Low</option>
+                  <option value="rating-desc">Highest Rated</option>
+                </select>
+                <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500 pointer-events-none" />
+              </div>
             </div>
           </div>
         </div>

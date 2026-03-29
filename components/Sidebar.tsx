@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ChevronDown, ChevronUp, Folder, Home, Music, Smartphone, HardDrive, Sparkles, TrendingUp, Percent, Shield, Zap, Watch } from 'lucide-react';
+import { ChevronDown, ChevronUp, Folder, Home, Music, Smartphone, HardDrive, Sparkles, TrendingUp, Percent, Shield, Zap, Watch, X } from 'lucide-react';
 
 interface SidebarProps {
   activeCategory: string;
@@ -9,6 +9,8 @@ interface SidebarProps {
   activeBrand: string;
   onBrandChange: (brand: string) => void;
   totalProducts: number;
+  isOpen?: boolean;
+  onClose?: () => void;
 }
 
 export default function Sidebar({ 
@@ -18,7 +20,9 @@ export default function Sidebar({
   onBadgeChange,
   activeBrand,
   onBrandChange,
-  totalProducts 
+  totalProducts,
+  isOpen = false,
+  onClose
 }: SidebarProps) {
   const [isBrandsOpen, setIsBrandsOpen] = useState(true);
 
@@ -41,8 +45,28 @@ export default function Sidebar({
   const brands = ['Apple', 'Samsung', 'Sony', 'Bose', 'Anker', 'Logitech'];
 
   return (
-    <aside className="w-64 flex-shrink-0 flex flex-col gap-8">
-      <div>
+    <>
+      {/* Mobile Overlay */}
+      {isOpen && (
+        <div 
+          className="fixed inset-0 bg-black/50 z-40 md:hidden"
+          onClick={onClose}
+        />
+      )}
+
+      <aside className={`
+        fixed inset-y-0 left-0 z-50 w-[280px] bg-white p-6 overflow-y-auto transition-transform duration-300 ease-in-out
+        md:static md:w-64 md:p-0 md:bg-transparent md:translate-x-0 md:flex-shrink-0 flex flex-col gap-8
+        ${isOpen ? 'translate-x-0' : '-translate-x-full'}
+      `}>
+        <div className="flex items-center justify-between md:hidden mb-2">
+          <h2 className="text-xl font-bold text-gray-900">Filters</h2>
+          <button onClick={onClose} className="p-2 text-gray-500 hover:text-gray-900 bg-gray-100 rounded-full">
+            <X className="w-5 h-5" />
+          </button>
+        </div>
+
+        <div>
         <h3 className="font-bold text-lg mb-4 text-gray-900">Category</h3>
         <ul className="flex flex-col gap-1.5">
           <li>
@@ -137,5 +161,6 @@ export default function Sidebar({
         )}
       </div>
     </aside>
+    </>
   );
 }

@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Search, ShoppingCart, X } from 'lucide-react';
+import { Search, ShoppingCart, X, Menu } from 'lucide-react';
 import Link from 'next/link';
 import { useCart } from '@/context/CartContext';
 import { useSearch } from '@/context/SearchContext';
@@ -11,6 +11,7 @@ export default function Header() {
   const { cartCount, setIsCartOpen } = useCart();
   const { searchQuery, setSearchQuery, isSearchOpen, setIsSearchOpen } = useSearch();
   const [inputValue, setInputValue] = useState(searchQuery);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   // Debounce logic
   useEffect(() => {
@@ -21,11 +22,18 @@ export default function Header() {
   }, [inputValue, setSearchQuery]);
 
   return (
-    <header className="flex items-center justify-between py-6 px-8 bg-[#F5F5F5]">
+    <header className="relative flex items-center justify-between py-4 md:py-6 px-4 md:px-8 bg-[#F5F5F5]">
       <div className="flex items-center gap-2">
+        {/* Mobile Menu Button */}
+        <button 
+          className="md:hidden p-2 -ml-2 text-gray-600 hover:text-[#FF5E00]"
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+        >
+          {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+        </button>
         {/* Logo icon placeholder */}
-        <div className="w-6 h-6 bg-black rounded-sm transform rotate-45"></div>
-        <span className="text-xl font-bold tracking-tight">Stuffsus</span>
+        <div className="w-5 h-5 md:w-6 md:h-6 bg-black rounded-sm transform rotate-45 ml-2 md:ml-0"></div>
+        <span className="text-lg md:text-xl font-bold tracking-tight">Stuffsus</span>
       </div>
       <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-gray-600">
         <Link href="#" className="text-black font-bold">Beranda</Link>
@@ -80,6 +88,22 @@ export default function Header() {
           )}
         </button>
       </div>
+
+      {/* Mobile Menu Dropdown */}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div 
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            className="absolute top-full left-0 right-0 bg-white shadow-lg border-t border-gray-100 p-4 flex flex-col gap-4 md:hidden z-50"
+          >
+            <Link href="#" className="text-black font-bold px-4 py-2 hover:bg-gray-50 rounded-lg" onClick={() => setIsMobileMenuOpen(false)}>Beranda</Link>
+            <Link href="#" className="text-gray-600 font-medium px-4 py-2 hover:bg-gray-50 rounded-lg" onClick={() => setIsMobileMenuOpen(false)}>Shop</Link>
+            <Link href="#" className="text-gray-600 font-medium px-4 py-2 hover:bg-gray-50 rounded-lg" onClick={() => setIsMobileMenuOpen(false)}>Blog</Link>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </header>
   );
 }

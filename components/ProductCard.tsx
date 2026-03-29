@@ -77,12 +77,12 @@ export default function ProductCard({ id, title, price, rating, reviews, categor
                 <span>({reviews} Reviews)</span>
               </div>
             </div>
-            <div className="flex flex-col items-end shrink-0 leading-none">
-              <span className={`font-bold text-lg ${originalPrice ? 'text-[#FF5E00]' : 'text-gray-900'}`}>
+            <div className="flex flex-col items-end shrink-0">
+              <span className={`font-bold text-lg leading-none ${originalPrice ? 'text-[#FF5E00]' : 'text-gray-900'}`}>
                 ${price.toFixed(2)}
               </span>
               {originalPrice && (
-                <span className="text-xs text-gray-400 line-through mt-1">
+                <span className="text-xs leading-none text-gray-400 line-through mt-1.5">
                   ${originalPrice.toFixed(2)}
                 </span>
               )}

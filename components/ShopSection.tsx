@@ -7,18 +7,18 @@ import { ChevronLeft, ChevronRight, SearchX, ChevronDown } from 'lucide-react';
 import { useSearch } from '@/context/SearchContext';
 
 const baseProducts = [
-  { title: 'Phone Holder Sakti', price: 29.90, rating: 5.0, reviews: '1.2k', category: 'Phone', imageSeed: 'holder' },
-  { title: 'Headsound', price: 12.00, rating: 5.0, reviews: '1.2k', category: 'Music', imageSeed: 'headphones' },
-  { title: 'Adudu Cleaner', price: 29.90, rating: 4.4, reviews: '1k', category: 'Home', imageSeed: 'robot-vacuum' },
-  { title: 'CCTV Maling', price: 50.00, rating: 4.8, reviews: '120', category: 'Home', imageSeed: 'cctv' },
-  { title: 'Stuffus Peker 32', price: 9.90, rating: 5.0, reviews: '1.2k', category: 'Music', imageSeed: 'speaker' },
-  { title: 'Stuffus R175', price: 34.10, rating: 4.8, reviews: '2.4k', category: 'Music', imageSeed: 'earbuds' },
-  { title: 'Smart Plug', price: 15.00, rating: 4.5, reviews: '800', category: 'Home', imageSeed: 'smart-plug' },
-  { title: 'USB-C Hub', price: 45.00, rating: 4.7, reviews: '3.1k', category: 'Phone', imageSeed: 'usb-hub' },
-  { title: '1TB SSD External', price: 89.90, rating: 4.9, reviews: '5k', category: 'Storage', imageSeed: 'ssd' },
-  { title: 'MicroSD 256GB', price: 25.00, rating: 4.6, reviews: '10k', category: 'Storage', imageSeed: 'microsd' },
-  { title: 'Wireless Charger', price: 22.50, rating: 4.3, reviews: '2k', category: 'Phone', imageSeed: 'wireless-charger' },
-  { title: 'Bluetooth Turntable', price: 150.00, rating: 4.8, reviews: '450', category: 'Music', imageSeed: 'turntable' },
+  { title: 'Phone Holder Sakti', price: 29.90, rating: 5.0, reviews: '1.2k', category: 'Mobile', imageSeed: 'holder', brand: 'Anker' },
+  { title: 'Headsound', price: 12.00, rating: 5.0, reviews: '1.2k', category: 'Audio', imageSeed: 'headphones', brand: 'Sony' },
+  { title: 'Adudu Cleaner', price: 29.90, rating: 4.4, reviews: '1k', category: 'Home', imageSeed: 'robot-vacuum', brand: 'Samsung' },
+  { title: 'CCTV Maling', price: 50.00, rating: 4.8, reviews: '120', category: 'Home', imageSeed: 'cctv', brand: 'Logitech' },
+  { title: 'Stuffus Peker 32', price: 9.90, rating: 5.0, reviews: '1.2k', category: 'Audio', imageSeed: 'speaker', brand: 'Bose' },
+  { title: 'Stuffus R175', price: 34.10, rating: 4.8, reviews: '2.4k', category: 'Audio', imageSeed: 'earbuds', brand: 'Samsung' },
+  { title: 'Smart Plug', price: 15.00, rating: 4.5, reviews: '800', category: 'Home', imageSeed: 'smart-plug', brand: 'Anker' },
+  { title: 'USB-C Hub', price: 45.00, rating: 4.7, reviews: '3.1k', category: 'Accessory', imageSeed: 'usb-hub', brand: 'Anker' },
+  { title: '1TB SSD External', price: 89.90, rating: 4.9, reviews: '5k', category: 'Accessory', imageSeed: 'ssd', brand: 'Samsung' },
+  { title: 'MicroSD 256GB', price: 25.00, rating: 4.6, reviews: '10k', category: 'Accessory', imageSeed: 'microsd', brand: 'Samsung' },
+  { title: 'Wireless Charger', price: 22.50, rating: 4.3, reviews: '2k', category: 'Mobile', imageSeed: 'wireless-charger', brand: 'Apple' },
+  { title: 'Bluetooth Turntable', price: 150.00, rating: 4.8, reviews: '450', category: 'Audio', imageSeed: 'turntable', brand: 'Sony' },
 ];
 
 const allProducts = Array.from({ length: 240 }, (_, i) => {
@@ -37,6 +37,8 @@ const ITEMS_PER_PAGE = 30;
 
 export default function ShopSection() {
   const [activeCategory, setActiveCategory] = useState('All');
+  const [activeBadge, setActiveBadge] = useState('All');
+  const [activeBrand, setActiveBrand] = useState('All');
   const [currentPage, setCurrentPage] = useState(1);
   const [sortBy, setSortBy] = useState('featured');
   const { searchQuery, setSearchQuery } = useSearch();
@@ -48,13 +50,21 @@ export default function ShopSection() {
       filtered = filtered.filter(p => p.category === activeCategory);
     }
     
+    if (activeBadge !== 'All') {
+      filtered = filtered.filter(p => p.badge === activeBadge);
+    }
+    
+    if (activeBrand !== 'All') {
+      filtered = filtered.filter(p => p.brand === activeBrand);
+    }
+    
     if (searchQuery.trim() !== '') {
       const lowerQuery = searchQuery.toLowerCase();
       filtered = filtered.filter(p => p.title.toLowerCase().includes(lowerQuery));
     }
     
     return filtered;
-  }, [activeCategory, searchQuery]);
+  }, [activeCategory, activeBadge, activeBrand, searchQuery]);
 
   const sortedProducts = useMemo(() => {
     const sorted = [...filteredProducts];
@@ -74,7 +84,7 @@ export default function ShopSection() {
   // Reset pagination when search query or sort changes
   useEffect(() => {
     setCurrentPage(1);
-  }, [searchQuery, sortBy]);
+  }, [searchQuery, sortBy, activeCategory, activeBadge, activeBrand]);
 
   const totalPages = Math.ceil(sortedProducts.length / ITEMS_PER_PAGE);
   const currentProducts = sortedProducts.slice(
@@ -92,6 +102,10 @@ export default function ShopSection() {
       <Sidebar 
         activeCategory={activeCategory} 
         onCategoryChange={handleCategoryChange} 
+        activeBadge={activeBadge}
+        onBadgeChange={setActiveBadge}
+        activeBrand={activeBrand}
+        onBrandChange={setActiveBrand}
         totalProducts={allProducts.length}
       />
       <div className="flex-1 flex flex-col gap-12">

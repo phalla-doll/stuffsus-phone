@@ -14,13 +14,15 @@ interface ProductCardProps {
   category: string;
   imageSeed: string;
   badge: string;
+  isOutOfStock?: boolean;
 }
 
-export default function ProductCard({ id, title, price, rating, reviews, category, imageSeed, badge }: ProductCardProps) {
+export default function ProductCard({ id, title, price, rating, reviews, category, imageSeed, badge, isOutOfStock = false }: ProductCardProps) {
   const [isQuickViewOpen, setIsQuickViewOpen] = useState(false);
   const { addToCart } = useCart();
 
   const handleAddToCart = () => {
+    if (isOutOfStock) return;
     addToCart({ id, title, price, imageSeed, quantity: 1 });
     setIsQuickViewOpen(false);
   };
@@ -32,9 +34,19 @@ export default function ProductCard({ id, title, price, rating, reviews, categor
           className="relative aspect-square rounded-3xl bg-[#EBEBEB] flex items-center justify-center overflow-hidden transition-transform group-hover:scale-[1.02] cursor-pointer"
           onClick={() => setIsQuickViewOpen(true)}
         >
-          <span className="absolute top-4 right-4 px-4 py-1.5 bg-white/90 backdrop-blur-sm rounded-full text-[10px] font-bold uppercase tracking-wider text-[#FF5E00] z-10 shadow-sm">
-            {badge}
-          </span>
+          {!isOutOfStock && (
+            <span className="absolute top-4 right-4 px-4 py-1.5 bg-white/90 backdrop-blur-sm rounded-full text-[10px] font-bold uppercase tracking-wider text-[#FF5E00] z-10 shadow-sm">
+              {badge}
+            </span>
+          )}
+
+          {isOutOfStock && (
+            <div className="absolute inset-0 bg-white/40 backdrop-blur-[2px] z-20 flex items-center justify-center">
+              <span className="px-4 py-2 bg-black text-white rounded-full text-xs font-bold uppercase tracking-wider shadow-lg">
+                Out of Stock
+              </span>
+            </div>
+          )}
           
           {/* Quick View Button Overlay - Hidden on mobile, visible on hover on desktop */}
           <button 
@@ -67,13 +79,23 @@ export default function ProductCard({ id, title, price, rating, reviews, categor
           <div className="flex items-center gap-2 mt-3">
             <button 
               onClick={handleAddToCart}
-              className="flex-1 py-2.5 rounded-full border border-gray-300 text-xs sm:text-sm font-bold text-gray-700 hover:border-[#FF5E00] hover:text-[#FF5E00] transition-colors bg-white"
+              disabled={isOutOfStock}
+              className={`flex-1 py-2.5 rounded-full border text-xs sm:text-sm font-bold transition-colors ${
+                isOutOfStock 
+                  ? 'border-gray-200 bg-gray-50 text-gray-400 cursor-not-allowed' 
+                  : 'border-gray-300 text-gray-700 hover:border-[#FF5E00] hover:text-[#FF5E00] bg-white'
+              }`}
             >
               Add to Cart
             </button>
             <button 
               onClick={handleAddToCart}
-              className="flex-1 py-2.5 rounded-full bg-black text-white text-xs sm:text-sm font-bold hover:bg-[#FF5E00] transition-colors shadow-sm shadow-black/5"
+              disabled={isOutOfStock}
+              className={`flex-1 py-2.5 rounded-full text-xs sm:text-sm font-bold transition-colors shadow-sm ${
+                isOutOfStock
+                  ? 'bg-gray-200 text-gray-400 cursor-not-allowed shadow-none'
+                  : 'bg-black text-white hover:bg-[#FF5E00] shadow-black/5'
+              }`}
             >
               Buy Now
             </button>
@@ -124,8 +146,16 @@ export default function ProductCard({ id, title, price, rating, reviews, categor
               </button>
               
               <span className="text-xs font-bold uppercase tracking-wider text-[#FF5E00] mb-2 md:mb-3">{category}</span>
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-2 md:mb-3 leading-tight">{title}</h2>
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-2 md:mb-3 leading-tight">
+                {title}
+              </h2>
               
+              {isOutOfStock && (
+                <span className="inline-block px-3 py-1 bg-red-100 text-red-600 text-xs font-bold uppercase tracking-wider rounded-full mb-3 w-fit">
+                  Out of Stock
+                </span>
+              )}
+
               <div className="flex items-center gap-2 text-sm text-gray-500 mb-4 md:mb-6">
                 <div className="flex items-center gap-1">
                   <Star className="w-4 h-4 fill-[#FF5E00] text-[#FF5E00]" />
@@ -173,9 +203,14 @@ export default function ProductCard({ id, title, price, rating, reviews, categor
                 <div className="flex gap-4">
                   <button 
                     onClick={handleAddToCart}
-                    className="flex-1 py-3 md:py-3.5 rounded-full bg-black text-white font-bold hover:bg-[#FF5E00] transition-colors shadow-sm shadow-black/5 text-sm md:text-base"
+                    disabled={isOutOfStock}
+                    className={`flex-1 py-3 md:py-3.5 rounded-full font-bold transition-colors shadow-sm text-sm md:text-base ${
+                      isOutOfStock
+                        ? 'bg-gray-200 text-gray-400 cursor-not-allowed shadow-none'
+                        : 'bg-black text-white hover:bg-[#FF5E00] shadow-black/5'
+                    }`}
                   >
-                    Add to Cart
+                    {isOutOfStock ? 'Out of Stock' : 'Add to Cart'}
                   </button>
                 </div>
               </div>

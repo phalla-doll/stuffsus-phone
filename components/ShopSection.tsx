@@ -7,18 +7,18 @@ import { ChevronLeft, ChevronRight, SearchX, ChevronDown, Search, SlidersHorizon
 import { useSearch } from '@/context/SearchContext';
 
 const baseProducts = [
-  { title: 'iPhone 15 Pro Max', price: 1199.00, rating: 4.9, reviews: '12k', category: 'Mobile', imageSeed: 'iphone', brand: 'Apple' },
-  { title: 'Galaxy S24 Ultra', price: 1299.00, rating: 4.8, reviews: '8k', category: 'Mobile', imageSeed: 'galaxy', brand: 'Samsung' },
-  { title: 'AirPods Pro 2', price: 249.00, rating: 4.9, reviews: '25k', category: 'Audio', imageSeed: 'airpods', brand: 'Apple' },
-  { title: 'Sony WH-1000XM5', price: 398.00, rating: 4.8, reviews: '15k', category: 'Audio', imageSeed: 'headphones', brand: 'Sony' },
-  { title: 'Silicone MagSafe Case', price: 49.00, rating: 4.5, reviews: '3k', category: 'Cases', imageSeed: 'phone-case', brand: 'Apple' },
-  { title: 'Rugged Armor Case', price: 19.99, rating: 4.7, reviews: '10k', category: 'Cases', imageSeed: 'rugged-case', brand: 'Anker' },
-  { title: 'Anker 735 Charger', price: 59.99, rating: 4.8, reviews: '5k', category: 'Chargers', imageSeed: 'charger', brand: 'Anker' },
-  { title: 'USB-C to USB-C Cable', price: 19.00, rating: 4.6, reviews: '8k', category: 'Chargers', imageSeed: 'cable', brand: 'Apple' },
-  { title: 'Apple Watch Series 9', price: 399.00, rating: 4.8, reviews: '10k', category: 'Wearables', imageSeed: 'smartwatch', brand: 'Apple' },
-  { title: 'Galaxy Watch 6', price: 299.00, rating: 4.6, reviews: '6k', category: 'Wearables', imageSeed: 'galaxy-watch', brand: 'Samsung' },
-  { title: 'Logitech MX Master 3S', price: 99.99, rating: 4.9, reviews: '18k', category: 'Accessory', imageSeed: 'mouse', brand: 'Logitech' },
-  { title: 'Smart Home Hub', price: 129.00, rating: 4.4, reviews: '2k', category: 'Home', imageSeed: 'smart-hub', brand: 'Samsung' },
+  { title: 'iPhone 15 Pro Max', price: 1199.00, rating: 4.9, reviews: '12k', category: 'Mobile', imageSeed: 'iphone', brand: 'Apple', isOutOfStock: false },
+  { title: 'Galaxy S24 Ultra', price: 1299.00, rating: 4.8, reviews: '8k', category: 'Mobile', imageSeed: 'galaxy', brand: 'Samsung', isOutOfStock: true },
+  { title: 'AirPods Pro 2', price: 249.00, rating: 4.9, reviews: '25k', category: 'Audio', imageSeed: 'airpods', brand: 'Apple', isOutOfStock: false },
+  { title: 'Sony WH-1000XM5', price: 398.00, rating: 4.8, reviews: '15k', category: 'Audio', imageSeed: 'headphones', brand: 'Sony', isOutOfStock: false },
+  { title: 'Silicone MagSafe Case', price: 49.00, rating: 4.5, reviews: '3k', category: 'Cases', imageSeed: 'phone-case', brand: 'Apple', isOutOfStock: false },
+  { title: 'Rugged Armor Case', price: 19.99, rating: 4.7, reviews: '10k', category: 'Cases', imageSeed: 'rugged-case', brand: 'Anker', isOutOfStock: true },
+  { title: 'Anker 735 Charger', price: 59.99, rating: 4.8, reviews: '5k', category: 'Chargers', imageSeed: 'charger', brand: 'Anker', isOutOfStock: false },
+  { title: 'USB-C to USB-C Cable', price: 19.00, rating: 4.6, reviews: '8k', category: 'Chargers', imageSeed: 'cable', brand: 'Apple', isOutOfStock: false },
+  { title: 'Apple Watch Series 9', price: 399.00, rating: 4.8, reviews: '10k', category: 'Wearables', imageSeed: 'smartwatch', brand: 'Apple', isOutOfStock: false },
+  { title: 'Galaxy Watch 6', price: 299.00, rating: 4.6, reviews: '6k', category: 'Wearables', imageSeed: 'galaxy-watch', brand: 'Samsung', isOutOfStock: false },
+  { title: 'Logitech MX Master 3S', price: 99.99, rating: 4.9, reviews: '18k', category: 'Accessory', imageSeed: 'mouse', brand: 'Logitech', isOutOfStock: false },
+  { title: 'Smart Home Hub', price: 129.00, rating: 4.4, reviews: '2k', category: 'Home', imageSeed: 'smart-hub', brand: 'Samsung', isOutOfStock: true },
 ];
 
 const allProducts = Array.from({ length: 240 }, (_, i) => {

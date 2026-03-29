@@ -5,12 +5,12 @@ import ProductCard from './ProductCard';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 
 const recommendations = [
-  { id: 10, title: 'TWS Bujug', price: 29.90, rating: 5.0, reviews: '1.2k', category: 'Other', imageSeed: 'tws', badge: 'New Arrival' },
-  { id: 11, title: 'Headsound Baptis', price: 50.00, rating: 5.0, reviews: '1.2k', category: 'Music', imageSeed: 'white-headphones', badge: 'Best Seller' },
-  { id: 12, title: 'Adudu Cleaner', price: 12.00, rating: 4.4, reviews: '1k', category: 'Other', imageSeed: 'piano', badge: 'Discount' },
-  { id: 13, title: 'Adu', price: 29.90, rating: 4.4, reviews: '1k', category: 'Music', imageSeed: 'device', badge: 'New Arrival' },
-  { id: 14, title: 'Sonic Boom', price: 89.99, rating: 4.8, reviews: '800', category: 'Audio', imageSeed: 'speaker', badge: 'Hot' },
-  { id: 15, title: 'Clear View', price: 120.00, rating: 4.6, reviews: '450', category: 'Vision', imageSeed: 'glasses', badge: 'Sale' },
+  { id: 10, title: 'TWS Bujug', price: 29.90, rating: 5.0, reviews: '1.2k', category: 'Other', imageSeed: 'tws', badge: 'New Arrival', isOutOfStock: false },
+  { id: 11, title: 'Headsound Baptis', price: 50.00, rating: 5.0, reviews: '1.2k', category: 'Music', imageSeed: 'white-headphones', badge: 'Best Seller', isOutOfStock: false },
+  { id: 12, title: 'Adudu Cleaner', price: 12.00, rating: 4.4, reviews: '1k', category: 'Other', imageSeed: 'piano', badge: 'Discount', isOutOfStock: true },
+  { id: 13, title: 'Adu', price: 29.90, rating: 4.4, reviews: '1k', category: 'Music', imageSeed: 'device', badge: 'New Arrival', isOutOfStock: false },
+  { id: 14, title: 'Sonic Boom', price: 89.99, rating: 4.8, reviews: '800', category: 'Audio', imageSeed: 'speaker', badge: 'Hot', isOutOfStock: false },
+  { id: 15, title: 'Clear View', price: 120.00, rating: 4.6, reviews: '450', category: 'Vision', imageSeed: 'glasses', badge: 'Sale', isOutOfStock: true },
 ];
 
 export default function Recommendations() {

@@ -106,7 +106,7 @@ export default function ShopSection() {
               id="sort"
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value)}
-              className="bg-white border border-gray-200 text-gray-900 text-sm rounded-full focus:ring-[#FF5E00] focus:border-[#FF5E00] block px-4 py-2 outline-none cursor-pointer transition-colors hover:border-gray-300"
+              className="bg-white border border-gray-200 text-gray-900 text-sm rounded-full focus:ring-[#FF5E00] focus:border-[#FF5E00] block pl-4 pr-10 py-2 outline-none cursor-pointer transition-colors hover:border-gray-300"
             >
               <option value="featured">Featured</option>
               <option value="price-asc">Price: Low to High</option>

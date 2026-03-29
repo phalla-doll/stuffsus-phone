@@ -10,8 +10,8 @@ export default function Home() {
     <main className="min-h-screen max-w-[1440px] mx-auto bg-[#F5F5F5]">
       <Header />
       <Hero />
-      <ShopSection />
       <Recommendations />
+      <ShopSection />
       <Newsletter />
       <Footer />
     </main>

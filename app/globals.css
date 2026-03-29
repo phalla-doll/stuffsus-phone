@@ -1,0 +1,9 @@
+@import "tailwindcss";
+
+@theme {
+  --font-satoshi: 'Satoshi', sans-serif;
+}
+
+.font-satoshi {
+  font-family: var(--font-satoshi);
+}

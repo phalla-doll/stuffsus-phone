@@ -7,7 +7,7 @@ export default function Sidebar() {
         <h3 className="font-bold text-lg mb-4 text-gray-900">Category</h3>
         <ul className="flex flex-col gap-1.5">
           <li>
-            <button className="w-full flex items-center justify-between px-4 py-3 bg-white rounded-2xl text-sm font-bold text-gray-900 shadow-sm border border-gray-100">
+            <button className="w-full flex items-center justify-between px-4 py-3 bg-white rounded-2xl text-sm font-bold text-gray-900 shadow-sm shadow-black/5 border border-gray-100">
               <div className="flex items-center gap-3">
                 <Folder className="w-4 h-4 text-gray-400" />
                 All Product

@@ -86,7 +86,7 @@ export default function ProductCard({ id, title, price, rating, reviews, categor
           onClick={() => setIsQuickViewOpen(false)}
         >
           <div 
-            className="bg-white rounded-[2rem] w-full max-w-4xl overflow-hidden flex flex-col md:flex-row shadow-2xl max-h-[90vh]"
+            className="bg-white rounded-[2rem] w-full max-w-6xl overflow-hidden flex flex-col md:flex-row shadow-2xl max-h-[90vh]"
             onClick={e => e.stopPropagation()}
           >
             {/* Image Side */}
@@ -130,6 +130,32 @@ export default function ProductCard({ id, title, price, rating, reviews, categor
               <p className="text-gray-500 mb-8 leading-relaxed">
                 Experience premium quality with the {title}. Designed for everyday use, this product combines durability with modern aesthetics to meet all your needs. Perfect for those who appreciate both form and function.
               </p>
+              
+              <div className="mb-8">
+                <h4 className="text-lg font-bold text-gray-900 mb-4">Product Specifications</h4>
+                <div className="border border-gray-200 rounded-xl overflow-hidden">
+                  <table className="w-full text-sm text-left">
+                    <tbody className="divide-y divide-gray-200">
+                      <tr className="bg-gray-50">
+                        <th className="px-4 py-3 font-medium text-gray-900 w-1/3">Category</th>
+                        <td className="px-4 py-3 text-gray-600">{category}</td>
+                      </tr>
+                      <tr>
+                        <th className="px-4 py-3 font-medium text-gray-900 w-1/3">Weight</th>
+                        <td className="px-4 py-3 text-gray-600">1.2 kg</td>
+                      </tr>
+                      <tr className="bg-gray-50">
+                        <th className="px-4 py-3 font-medium text-gray-900 w-1/3">Dimensions</th>
+                        <td className="px-4 py-3 text-gray-600">15 x 10 x 5 cm</td>
+                      </tr>
+                      <tr>
+                        <th className="px-4 py-3 font-medium text-gray-900 w-1/3">Warranty</th>
+                        <td className="px-4 py-3 text-gray-600">1 Year Manufacturer</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
               
               <div className="mt-auto pt-8 border-t border-gray-100">
                 <div className="text-4xl font-black text-gray-900 mb-6">${price.toFixed(2)}</div>

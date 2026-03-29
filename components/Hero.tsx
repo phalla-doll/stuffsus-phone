@@ -4,17 +4,17 @@ import Image from 'next/image';
 export default function Hero() {
   return (
     <section className="px-8 mb-16">
-      <div className="relative w-full h-[300px] md:h-[400px] rounded-3xl overflow-hidden bg-gray-200 flex items-center justify-center">
+      <div className="relative w-full h-[300px] md:h-[400px] rounded-3xl overflow-hidden flex items-center justify-center">
         {/* Background Image */}
         <Image 
           src="https://picsum.photos/seed/interior/1920/1080" 
           alt="Interior" 
           fill
-          className="absolute inset-0 object-cover opacity-60 mix-blend-overlay"
+          className="absolute inset-0 object-cover"
           referrerPolicy="no-referrer"
         />
         {/* Large Text */}
-        <h1 className="relative z-10 text-[120px] md:text-[200px] font-black text-white tracking-tighter leading-none opacity-90 mix-blend-overlay select-none">
+        <h1 className="relative z-10 text-[120px] md:text-[200px] font-black text-white tracking-tighter leading-none opacity-90 select-none drop-shadow-2xl">
           Shop
         </h1>
         

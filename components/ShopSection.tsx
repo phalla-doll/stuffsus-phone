@@ -1,9 +1,10 @@
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import Sidebar from './Sidebar';
 import ProductCard from './ProductCard';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { ChevronLeft, ChevronRight, SearchX } from 'lucide-react';
+import { useSearch } from '@/context/SearchContext';
 
 const baseProducts = [
   { title: 'Phone Holder Sakti', price: 29.90, rating: 5.0, reviews: '1.2k', category: 'Phone', imageSeed: 'holder' },
@@ -37,11 +38,27 @@ const ITEMS_PER_PAGE = 30;
 export default function ShopSection() {
   const [activeCategory, setActiveCategory] = useState('All');
   const [currentPage, setCurrentPage] = useState(1);
+  const { searchQuery, setSearchQuery } = useSearch();
 
   const filteredProducts = useMemo(() => {
-    if (activeCategory === 'All') return allProducts;
-    return allProducts.filter(p => p.category === activeCategory);
-  }, [activeCategory]);
+    let filtered = allProducts;
+    
+    if (activeCategory !== 'All') {
+      filtered = filtered.filter(p => p.category === activeCategory);
+    }
+    
+    if (searchQuery.trim() !== '') {
+      const lowerQuery = searchQuery.toLowerCase();
+      filtered = filtered.filter(p => p.title.toLowerCase().includes(lowerQuery));
+    }
+    
+    return filtered;
+  }, [activeCategory, searchQuery]);
+
+  // Reset pagination when search query changes
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [searchQuery]);
 
   const totalPages = Math.ceil(filteredProducts.length / ITEMS_PER_PAGE);
   const currentProducts = filteredProducts.slice(
@@ -62,11 +79,25 @@ export default function ShopSection() {
         totalProducts={allProducts.length}
       />
       <div className="flex-1 flex flex-col gap-12">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
-          {currentProducts.map((product) => (
-            <ProductCard key={product.id} {...product} />
-          ))}
-        </div>
+        {currentProducts.length === 0 ? (
+          <div className="flex flex-col items-center justify-center py-24 text-gray-400 gap-4 bg-white rounded-3xl border border-gray-100 shadow-sm">
+            <SearchX className="w-16 h-16 opacity-20" />
+            <p className="font-medium text-lg text-gray-900">No products found</p>
+            <p className="text-sm">We couldn't find anything matching "{searchQuery}"</p>
+            <button 
+              onClick={() => setSearchQuery('')} 
+              className="mt-2 px-6 py-2 bg-black text-white rounded-full font-bold hover:bg-[#FF5E00] transition-colors text-sm"
+            >
+              Clear Search
+            </button>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
+            {currentProducts.map((product) => (
+              <ProductCard key={product.id} {...product} />
+            ))}
+          </div>
+        )}
         
         {/* Pagination */}
         {totalPages > 1 && (

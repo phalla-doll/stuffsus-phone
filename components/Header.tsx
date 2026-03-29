@@ -1,11 +1,24 @@
 'use client';
 
-import { Search, ShoppingCart } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { Search, ShoppingCart, X } from 'lucide-react';
 import Link from 'next/link';
 import { useCart } from '@/context/CartContext';
+import { useSearch } from '@/context/SearchContext';
+import { motion, AnimatePresence } from 'motion/react';
 
 export default function Header() {
   const { cartCount, setIsCartOpen } = useCart();
+  const { searchQuery, setSearchQuery, isSearchOpen, setIsSearchOpen } = useSearch();
+  const [inputValue, setInputValue] = useState(searchQuery);
+
+  // Debounce logic
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setSearchQuery(inputValue);
+    }, 300); // 300ms debounce
+    return () => clearTimeout(timer);
+  }, [inputValue, setSearchQuery]);
 
   return (
     <header className="flex items-center justify-between py-6 px-8 bg-[#F5F5F5]">
@@ -20,9 +33,41 @@ export default function Header() {
         <Link href="#" className="hover:text-black transition-colors">Blog</Link>
       </nav>
       <div className="flex items-center gap-6">
-        <button className="text-gray-600 hover:text-[#FF5E00] transition-colors">
-          <Search className="w-5 h-5" />
-        </button>
+        <div className="flex items-center gap-2">
+          <AnimatePresence>
+            {isSearchOpen && (
+              <motion.div 
+                initial={{ opacity: 0, width: 0 }}
+                animate={{ opacity: 1, width: '200px' }}
+                exit={{ opacity: 0, width: 0 }}
+                className="overflow-hidden"
+              >
+                <input 
+                  type="text"
+                  autoFocus
+                  placeholder="Search products..."
+                  value={inputValue}
+                  onChange={(e) => setInputValue(e.target.value)}
+                  className="w-full px-4 py-1.5 rounded-full border border-gray-200 focus:outline-none focus:border-[#FF5E00] text-sm"
+                />
+              </motion.div>
+            )}
+          </AnimatePresence>
+          <button 
+            onClick={() => {
+              if (isSearchOpen) {
+                setIsSearchOpen(false);
+                setInputValue('');
+                setSearchQuery('');
+              } else {
+                setIsSearchOpen(true);
+              }
+            }}
+            className="text-gray-600 hover:text-[#FF5E00] transition-colors p-1"
+          >
+            {isSearchOpen ? <X className="w-5 h-5" /> : <Search className="w-5 h-5" />}
+          </button>
+        </div>
         <button 
           onClick={() => setIsCartOpen(true)}
           className="text-gray-600 hover:text-[#FF5E00] transition-colors relative"

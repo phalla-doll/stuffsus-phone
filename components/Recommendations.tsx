@@ -2,10 +2,10 @@ import ProductCard from './ProductCard';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 
 const recommendations = [
-  { id: 10, title: 'TWS Bujug', price: 29.90, rating: 5.0, reviews: '1.2k', category: 'Other', imageSeed: 'tws' },
-  { id: 11, title: 'Headsound Baptis', price: 50.00, rating: 5.0, reviews: '1.2k', category: 'Music', imageSeed: 'white-headphones' },
-  { id: 12, title: 'Adudu Cleaner', price: 12.00, rating: 4.4, reviews: '1k', category: 'Other', imageSeed: 'piano' },
-  { id: 13, title: 'Adu', price: 29.90, rating: 4.4, reviews: '1k', category: 'Music', imageSeed: 'device' },
+  { id: 10, title: 'TWS Bujug', price: 29.90, rating: 5.0, reviews: '1.2k', category: 'Other', imageSeed: 'tws', badge: 'New Arrival' },
+  { id: 11, title: 'Headsound Baptis', price: 50.00, rating: 5.0, reviews: '1.2k', category: 'Music', imageSeed: 'white-headphones', badge: 'Best Seller' },
+  { id: 12, title: 'Adudu Cleaner', price: 12.00, rating: 4.4, reviews: '1k', category: 'Other', imageSeed: 'piano', badge: 'Discount' },
+  { id: 13, title: 'Adu', price: 29.90, rating: 4.4, reviews: '1k', category: 'Music', imageSeed: 'device', badge: 'New Arrival' },
 ];
 
 export default function Recommendations() {

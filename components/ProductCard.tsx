@@ -13,9 +13,10 @@ interface ProductCardProps {
   reviews: string;
   category: string;
   imageSeed: string;
+  badge: string;
 }
 
-export default function ProductCard({ id, title, price, rating, reviews, category, imageSeed }: ProductCardProps) {
+export default function ProductCard({ id, title, price, rating, reviews, category, imageSeed, badge }: ProductCardProps) {
   const [isQuickViewOpen, setIsQuickViewOpen] = useState(false);
   const { addToCart } = useCart();
 
@@ -28,8 +29,8 @@ export default function ProductCard({ id, title, price, rating, reviews, categor
     <>
       <div className="group flex flex-col gap-4">
         <div className="relative aspect-square rounded-3xl bg-[#EBEBEB] flex items-center justify-center overflow-hidden transition-transform group-hover:scale-[1.02]">
-          <span className="absolute top-4 right-4 px-4 py-1.5 bg-white/90 backdrop-blur-sm rounded-full text-[10px] font-bold uppercase tracking-wider text-gray-800 z-10 shadow-sm">
-            {category}
+          <span className="absolute top-4 right-4 px-4 py-1.5 bg-white/90 backdrop-blur-sm rounded-full text-[10px] font-bold uppercase tracking-wider text-[#FF5E00] z-10 shadow-sm">
+            {badge}
           </span>
           
           {/* Quick View Button Overlay */}

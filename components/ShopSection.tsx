@@ -22,11 +22,13 @@ const baseProducts = [
 
 const allProducts = Array.from({ length: 240 }, (_, i) => {
   const base = baseProducts[i % baseProducts.length];
+  const badges = ['New Arrival', 'Best Seller', 'Discount'];
   return {
     ...base,
     id: i + 1,
     title: `${base.title} Gen ${Math.floor(i / baseProducts.length) + 1}`,
-    imageSeed: `${base.imageSeed}-${i}`
+    imageSeed: `${base.imageSeed}-${i}`,
+    badge: badges[i % 3]
   };
 });
 

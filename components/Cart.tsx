@@ -13,6 +13,9 @@ export default function Cart() {
   const [address, setAddress] = useState('');
   const [isSuccess, setIsSuccess] = useState(false);
 
+  const cartOriginalTotal = items.reduce((acc, item) => acc + ((item.originalPrice || item.price) * item.quantity), 0);
+  const totalDiscount = cartOriginalTotal - cartTotal;
+
   if (!isCartOpen && !isCheckoutOpen && !isSuccess) return null;
 
   const handleConfirmOrder = () => {
@@ -89,7 +92,16 @@ export default function Cart() {
                       </div>
                       <div className="flex-1">
                         <h3 className="font-bold text-gray-900 line-clamp-1">{item.title}</h3>
-                        <p className="text-[#FF5E00] font-bold">${item.price.toFixed(2)}</p>
+                        <div className="flex items-center gap-2">
+                          <p className={`font-bold ${item.originalPrice ? 'text-[#FF5E00]' : 'text-gray-900'}`}>
+                            ${item.price.toFixed(2)}
+                          </p>
+                          {item.originalPrice && (
+                            <p className="text-xs text-gray-400 line-through">
+                              ${item.originalPrice.toFixed(2)}
+                            </p>
+                          )}
+                        </div>
                         <div className="flex items-center gap-3 mt-2">
                           <button 
                             onClick={() => updateQuantity(item.id, item.quantity - 1)} 
@@ -127,15 +139,28 @@ export default function Cart() {
             </div>
 
             {items.length > 0 && (
-              <div className="p-6 border-t border-gray-100 bg-gray-50/50">
-                <div className="flex justify-between items-center mb-6">
-                  <span className="text-gray-500 font-medium">Total</span>
+              <div className="p-6 border-t border-gray-100 bg-gray-50/50 flex flex-col gap-3">
+                {totalDiscount > 0 && (
+                  <>
+                    <div className="flex justify-between items-center text-sm">
+                      <span className="text-gray-500">Subtotal</span>
+                      <span className="font-medium text-gray-900">${cartOriginalTotal.toFixed(2)}</span>
+                    </div>
+                    <div className="flex justify-between items-center text-sm">
+                      <span className="text-gray-500">Discount</span>
+                      <span className="font-medium text-[#FF5E00]">-${totalDiscount.toFixed(2)}</span>
+                    </div>
+                    <div className="h-px bg-gray-200 w-full my-1"></div>
+                  </>
+                )}
+                <div className="flex justify-between items-center mb-3">
+                  <span className="text-gray-900 font-bold text-lg">Total</span>
                   <motion.span 
                     key={cartTotal}
                     initial={{ scale: 1.1, color: '#FF5E00' }}
                     animate={{ scale: 1, color: '#111827' }}
                     transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                    className="text-2xl font-black text-gray-900"
+                    className={`text-2xl font-black ${totalDiscount > 0 ? 'text-[#FF5E00]' : 'text-gray-900'}`}
                   >
                     ${cartTotal.toFixed(2)}
                   </motion.span>

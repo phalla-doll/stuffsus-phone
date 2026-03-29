@@ -24,7 +24,7 @@ export default function ProductCard({ id, title, price, rating, reviews, categor
 
   const handleAddToCart = () => {
     if (isOutOfStock) return;
-    addToCart({ id, title, price, imageSeed, quantity: 1 });
+    addToCart({ id, title, price, originalPrice, imageSeed, quantity: 1 });
     setIsQuickViewOpen(false);
   };
 

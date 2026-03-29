@@ -5,8 +5,37 @@ import { SearchProvider } from '@/context/SearchContext';
 import Cart from '@/components/Cart';
 
 export const metadata: Metadata = {
-  title: 'Stuffsus - Tech Shop',
-  description: 'Give All You Need',
+  title: 'Stuffsus - Premium Tech Shop',
+  description: 'Discover the latest tech gadgets, mobile phones, audio accessories, and smart home devices at Stuffsus. Give All You Need.',
+  keywords: ['tech', 'gadgets', 'mobile phones', 'audio', 'smart home', 'accessories', 'Stuffsus', 'ecommerce'],
+  authors: [{ name: 'Stuffsus Team' }],
+  openGraph: {
+    title: 'Stuffsus - Premium Tech Shop',
+    description: 'Discover the latest tech gadgets, mobile phones, audio accessories, and smart home devices at Stuffsus. Give All You Need.',
+    url: 'https://stuffsus.com',
+    siteName: 'Stuffsus',
+    images: [
+      {
+        url: 'https://picsum.photos/seed/interior/1200/630',
+        width: 1200,
+        height: 630,
+        alt: 'Stuffsus Tech Shop',
+      },
+    ],
+    locale: 'en_US',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Stuffsus - Premium Tech Shop',
+    description: 'Discover the latest tech gadgets, mobile phones, audio accessories, and smart home devices at Stuffsus.',
+    images: ['https://picsum.photos/seed/interior/1200/630'],
+  },
+  icons: {
+    icon: '/icon.svg',
+    shortcut: '/icon.svg',
+    apple: '/icon.svg',
+  },
 };
 
 export default function RootLayout({children}: {children: React.ReactNode}) {

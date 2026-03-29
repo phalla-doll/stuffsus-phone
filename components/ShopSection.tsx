@@ -3,6 +3,7 @@
 import { useState, useMemo, useEffect } from 'react';
 import Sidebar from './Sidebar';
 import ProductCard from './ProductCard';
+import ProductCardSkeleton from './ProductCardSkeleton';
 import { ChevronLeft, ChevronRight, SearchX, ChevronDown, Search, SlidersHorizontal } from 'lucide-react';
 import { useSearch } from '@/context/SearchContext';
 
@@ -44,7 +45,15 @@ export default function ShopSection() {
   const [currentPage, setCurrentPage] = useState(1);
   const [sortBy, setSortBy] = useState('featured');
   const [isMobileFiltersOpen, setIsMobileFiltersOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const { searchQuery, setSearchQuery } = useSearch();
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 1500);
+    return () => clearTimeout(timer);
+  }, []);
 
   const filteredProducts = useMemo(() => {
     let filtered = allProducts;
@@ -156,7 +165,13 @@ export default function ShopSection() {
           </div>
         </div>
 
-        {currentProducts.length === 0 ? (
+        {isLoading ? (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
+            {Array.from({ length: 12 }).map((_, i) => (
+              <ProductCardSkeleton key={i} />
+            ))}
+          </div>
+        ) : currentProducts.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-24 text-gray-400 gap-4 bg-white rounded-3xl border border-gray-100 shadow-sm">
             <SearchX className="w-16 h-16 opacity-20" />
             <p className="font-medium text-lg text-gray-900">No products found</p>
@@ -177,7 +192,7 @@ export default function ShopSection() {
         )}
         
         {/* Pagination */}
-        {totalPages > 1 && (
+        {!isLoading && totalPages > 1 && (
           <div className="flex items-center justify-between pt-6 md:pt-8 border-t border-gray-200">
             <button 
               onClick={() => setCurrentPage(p => Math.max(1, p - 1))}

@@ -1,7 +1,8 @@
 'use client';
 
-import { useRef } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import ProductCard from './ProductCard';
+import ProductCardSkeleton from './ProductCardSkeleton';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 
 const recommendations = [
@@ -15,6 +16,14 @@ const recommendations = [
 
 export default function Recommendations() {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 1500);
+    return () => clearTimeout(timer);
+  }, []);
 
   const scroll = (direction: 'left' | 'right') => {
     if (scrollContainerRef.current) {
@@ -50,11 +59,19 @@ export default function Recommendations() {
         className="flex overflow-x-auto gap-4 md:gap-6 pb-4 snap-x snap-mandatory hide-scrollbar -mx-4 px-4 md:mx-0 md:px-0"
         style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
       >
-        {recommendations.map((product) => (
-          <div key={product.id} className="min-w-[260px] sm:min-w-[300px] lg:min-w-[calc(25%-1.125rem)] snap-start">
-            <ProductCard {...product} />
-          </div>
-        ))}
+        {isLoading ? (
+          Array.from({ length: 4 }).map((_, i) => (
+            <div key={`skeleton-${i}`} className="min-w-[260px] sm:min-w-[300px] lg:min-w-[calc(25%-1.125rem)] snap-start">
+              <ProductCardSkeleton />
+            </div>
+          ))
+        ) : (
+          recommendations.map((product) => (
+            <div key={product.id} className="min-w-[260px] sm:min-w-[300px] lg:min-w-[calc(25%-1.125rem)] snap-start">
+              <ProductCard {...product} />
+            </div>
+          ))
+        )}
       </div>
     </section>
   );

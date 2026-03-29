@@ -197,7 +197,7 @@ export default function ShopSection() {
                 <button 
                   key={page}
                   onClick={() => setCurrentPage(page)}
-                  className={`w-8 h-8 md:w-10 md:h-10 flex items-center justify-center rounded-full text-sm font-bold transition-colors ${
+                  className={`w-8 h-8 md:w-9 md:h-9 flex items-center justify-center rounded-full text-sm font-bold transition-colors ${
                     currentPage === page 
                       ? 'bg-gray-200 text-gray-900' 
                       : 'text-gray-500 hover:bg-gray-200 hover:text-gray-900'

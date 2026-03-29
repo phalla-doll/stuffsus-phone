@@ -67,13 +67,13 @@ export default function ProductCard({ id, title, price, rating, reviews, categor
           <div className="flex items-center gap-2 mt-3">
             <button 
               onClick={handleAddToCart}
-              className="flex-1 py-3 rounded-full border border-gray-300 text-sm font-bold text-gray-700 hover:border-[#FF5E00] hover:text-[#FF5E00] transition-colors bg-white"
+              className="flex-1 py-2.5 rounded-full border border-gray-300 text-xs sm:text-sm font-bold text-gray-700 hover:border-[#FF5E00] hover:text-[#FF5E00] transition-colors bg-white"
             >
               Add to Cart
             </button>
             <button 
               onClick={handleAddToCart}
-              className="flex-1 py-3 rounded-full bg-black text-white text-sm font-bold hover:bg-[#FF5E00] transition-colors shadow-sm shadow-black/5"
+              className="flex-1 py-2.5 rounded-full bg-black text-white text-xs sm:text-sm font-bold hover:bg-[#FF5E00] transition-colors shadow-sm shadow-black/5"
             >
               Buy Now
             </button>
@@ -173,7 +173,7 @@ export default function ProductCard({ id, title, price, rating, reviews, categor
                 <div className="flex gap-4">
                   <button 
                     onClick={handleAddToCart}
-                    className="flex-1 py-3 md:py-4 rounded-full bg-black text-white font-bold hover:bg-[#FF5E00] transition-colors shadow-sm shadow-black/5 text-base md:text-lg"
+                    className="flex-1 py-3 md:py-3.5 rounded-full bg-black text-white font-bold hover:bg-[#FF5E00] transition-colors shadow-sm shadow-black/5 text-sm md:text-base"
                   >
                     Add to Cart
                   </button>

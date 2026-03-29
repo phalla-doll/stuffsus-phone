@@ -26,16 +26,16 @@ export default function Footer() {
         <div className="flex flex-col items-start md:items-end gap-3 md:gap-4">
           <span className="text-sm font-bold text-gray-400">Social Media</span>
           <div className="flex items-center gap-3">
-            <a href="#" className="w-10 h-10 rounded-full bg-black text-white flex items-center justify-center hover:bg-[#FF5E00] transition-colors">
+            <a href="#" className="w-9 h-9 rounded-full bg-black text-white flex items-center justify-center hover:bg-[#FF5E00] transition-colors">
               <Twitter className="w-4 h-4" />
             </a>
-            <a href="#" className="w-10 h-10 rounded-full bg-black text-white flex items-center justify-center hover:bg-[#FF5E00] transition-colors">
+            <a href="#" className="w-9 h-9 rounded-full bg-black text-white flex items-center justify-center hover:bg-[#FF5E00] transition-colors">
               <Facebook className="w-4 h-4" />
             </a>
-            <a href="#" className="w-10 h-10 rounded-full bg-black text-white flex items-center justify-center hover:bg-[#FF5E00] transition-colors">
+            <a href="#" className="w-9 h-9 rounded-full bg-black text-white flex items-center justify-center hover:bg-[#FF5E00] transition-colors">
               <Linkedin className="w-4 h-4" />
             </a>
-            <a href="#" className="w-10 h-10 rounded-full bg-black text-white flex items-center justify-center hover:bg-[#FF5E00] transition-colors">
+            <a href="#" className="w-9 h-9 rounded-full bg-black text-white flex items-center justify-center hover:bg-[#FF5E00] transition-colors">
               <Instagram className="w-4 h-4" />
             </a>
           </div>

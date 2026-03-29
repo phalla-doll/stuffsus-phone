@@ -22,7 +22,7 @@ export default function Header() {
   }, [inputValue, setSearchQuery]);
 
   return (
-    <header className="relative flex items-center justify-between py-4 md:py-6 px-4 md:px-8 bg-[#F5F5F5]">
+    <header className="relative flex items-center justify-between py-4 md:py-6 px-4 md:px-8 bg-[#F5F5F5] mb-4 md:mb-8">
       <div className="flex items-center gap-2">
         {/* Mobile Menu Button */}
         <button 

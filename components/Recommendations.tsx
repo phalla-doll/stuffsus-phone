@@ -30,18 +30,18 @@ export default function Recommendations() {
     <section className="px-4 md:px-8 mb-16 md:mb-24">
       <div className="flex items-end justify-between mb-6 md:mb-8">
         <h2 className="text-2xl md:text-3xl font-bold text-gray-900">Explore our recomendations</h2>
-        <div className="hidden sm:flex items-center gap-3">
+        <div className="hidden sm:flex items-center gap-2">
           <button 
             onClick={() => scroll('left')}
-            className="w-10 h-10 rounded-full border border-gray-300 flex items-center justify-center text-gray-600 hover:border-[#FF5E00] hover:text-[#FF5E00] transition-colors"
+            className="w-8 h-8 md:w-9 md:h-9 rounded-full border border-gray-300 flex items-center justify-center text-gray-600 hover:border-[#FF5E00] hover:text-[#FF5E00] transition-colors"
           >
-            <ArrowLeft className="w-5 h-5" />
+            <ArrowLeft className="w-4 h-4" />
           </button>
           <button 
             onClick={() => scroll('right')}
-            className="w-10 h-10 rounded-full border border-gray-300 flex items-center justify-center text-gray-600 hover:border-[#FF5E00] hover:text-[#FF5E00] transition-colors"
+            className="w-8 h-8 md:w-9 md:h-9 rounded-full border border-gray-300 flex items-center justify-center text-gray-600 hover:border-[#FF5E00] hover:text-[#FF5E00] transition-colors"
           >
-            <ArrowRight className="w-5 h-5" />
+            <ArrowRight className="w-4 h-4" />
           </button>
         </div>
       </div>

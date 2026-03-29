@@ -38,7 +38,7 @@ export default function ProductCard({ title, price, rating, reviews, category, i
               src={`https://picsum.photos/seed/${imageSeed}/400/400`} 
               alt={title} 
               fill
-              className="object-contain"
+              className="object-cover"
               referrerPolicy="no-referrer"
             />
           </div>
@@ -81,7 +81,7 @@ export default function ProductCard({ title, price, rating, reviews, category, i
                   src={`https://picsum.photos/seed/${imageSeed}/800/800`} 
                   alt={title} 
                   fill
-                  className="object-contain"
+                  className="object-cover"
                   referrerPolicy="no-referrer"
                 />
               </div>

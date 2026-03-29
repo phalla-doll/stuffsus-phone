@@ -176,21 +176,28 @@ export default function ShopSection() {
         
         {/* Pagination */}
         {totalPages > 1 && (
-          <div className="flex items-center justify-between pt-8 border-t border-gray-200">
+          <div className="flex items-center justify-between pt-6 md:pt-8 border-t border-gray-200">
             <button 
               onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
               disabled={currentPage === 1}
-              className="flex items-center gap-2 text-sm font-bold text-gray-500 hover:text-[#FF5E00] disabled:opacity-50 disabled:hover:text-gray-500 transition-colors"
+              className="flex items-center justify-center gap-2 text-sm font-bold text-gray-500 hover:text-[#FF5E00] disabled:opacity-50 disabled:hover:text-gray-500 transition-colors h-10 px-2 sm:px-0"
             >
-              <ChevronLeft className="w-4 h-4" />
-              Previous
+              <ChevronLeft className="w-5 h-5 sm:w-4 sm:h-4" />
+              <span className="hidden sm:inline">Previous</span>
             </button>
-            <div className="flex items-center gap-2">
+            
+            {/* Mobile Page Indicator */}
+            <div className="sm:hidden text-sm font-bold text-gray-900 bg-gray-100 px-4 py-2 rounded-full">
+              Page {currentPage} of {totalPages}
+            </div>
+
+            {/* Desktop Page Numbers */}
+            <div className="hidden sm:flex items-center gap-1 md:gap-2 flex-wrap justify-center">
               {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
                 <button 
                   key={page}
                   onClick={() => setCurrentPage(page)}
-                  className={`w-8 h-8 flex items-center justify-center rounded-full text-sm font-bold transition-colors ${
+                  className={`w-8 h-8 md:w-10 md:h-10 flex items-center justify-center rounded-full text-sm font-bold transition-colors ${
                     currentPage === page 
                       ? 'bg-gray-200 text-gray-900' 
                       : 'text-gray-500 hover:bg-gray-200 hover:text-gray-900'
@@ -200,13 +207,14 @@ export default function ShopSection() {
                 </button>
               ))}
             </div>
+
             <button 
               onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
               disabled={currentPage === totalPages}
-              className="flex items-center gap-2 text-sm font-bold text-gray-500 hover:text-[#FF5E00] disabled:opacity-50 disabled:hover:text-gray-500 transition-colors"
+              className="flex items-center justify-center gap-2 text-sm font-bold text-gray-500 hover:text-[#FF5E00] disabled:opacity-50 disabled:hover:text-gray-500 transition-colors h-10 px-2 sm:px-0"
             >
-              Next
-              <ChevronRight className="w-4 h-4" />
+              <span className="hidden sm:inline">Next</span>
+              <ChevronRight className="w-5 h-5 sm:w-4 sm:h-4" />
             </button>
           </div>
         )}

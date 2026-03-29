@@ -48,20 +48,14 @@ export default function Sidebar({
           <li>
             <button 
               onClick={() => onCategoryChange('All')}
-              className={`w-full flex items-center justify-between px-4 py-3 rounded-2xl text-sm font-bold transition-all ${
+              className={`w-full flex items-center gap-3 px-4 py-3 rounded-2xl text-sm font-medium transition-all ${
                 activeCategory === 'All' 
-                  ? 'bg-white text-gray-900 shadow-[0_2px_8px_rgba(0,0,0,0.04)] border border-gray-100' 
-                  : 'text-gray-500 hover:text-gray-900 hover:bg-white/50'
+                  ? 'bg-white text-gray-900 shadow-[0_2px_8px_rgba(0,0,0,0.04)] border border-gray-100 font-bold' 
+                  : 'text-gray-500 hover:text-[#FF5E00]'
               }`}
             >
-              <div className="flex items-center gap-3">
-                <Folder className={`w-4 h-4 ${activeCategory === 'All' ? 'text-[#FF5E00]' : 'text-gray-400'}`} />
-                All Product
-              </div>
-              <div className="flex items-center gap-2">
-                <span className="bg-[#FF5E00] text-white text-[10px] px-2 py-0.5 rounded-full">{totalProducts}</span>
-                <ChevronDown className="w-4 h-4 text-gray-400" />
-              </div>
+              <Folder className={`w-4 h-4 ${activeCategory === 'All' ? 'text-[#FF5E00]' : ''}`} />
+              All Products
             </button>
           </li>
           {categories.map(cat => (

@@ -30,9 +30,9 @@ export default function ProductCard({ id, title, price, rating, reviews, categor
 
   return (
     <>
-      <div className="group flex flex-col gap-4">
+      <div className="group flex flex-col gap-4 h-full">
         <div 
-          className="relative aspect-square rounded-3xl bg-[#EBEBEB] flex items-center justify-center overflow-hidden transition-transform group-hover:scale-[1.02] cursor-pointer"
+          className="relative aspect-square rounded-3xl bg-[#EBEBEB] flex items-center justify-center overflow-hidden transition-transform group-hover:scale-[1.02] cursor-pointer shrink-0"
           onClick={() => setIsQuickViewOpen(true)}
         >
           {!isOutOfStock && (
@@ -67,7 +67,7 @@ export default function ProductCard({ id, title, price, rating, reviews, categor
             />
           </div>
         </div>
-        <div className="flex flex-col gap-2 px-1">
+        <div className="flex flex-col gap-2 px-1 flex-1">
           <div className="flex justify-between items-start gap-2">
             <h3 className="font-bold text-lg leading-tight text-gray-900">{title}</h3>
             <div className="flex flex-col items-end shrink-0">
@@ -86,7 +86,7 @@ export default function ProductCard({ id, title, price, rating, reviews, categor
             <span className="font-bold text-gray-700">{rating.toFixed(1)}</span>
             <span>({reviews} Reviews)</span>
           </div>
-          <div className="flex items-center gap-2 mt-3">
+          <div className="flex items-center gap-2 mt-auto pt-2">
             <button 
               onClick={handleAddToCart}
               disabled={isOutOfStock}

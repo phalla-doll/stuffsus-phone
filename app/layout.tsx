@@ -6,12 +6,12 @@ import Cart from '@/components/Cart';
 
 export const metadata: Metadata = {
   title: 'Stuffsus - Premium Tech Shop',
-  description: 'Discover the latest tech gadgets, mobile phones, audio accessories, and smart home devices at Stuffsus. Give All You Need.',
+  description: 'Discover the latest tech gadgets, mobile phones, audio accessories, and smart home devices at Stuffsus.',
   keywords: ['tech', 'gadgets', 'mobile phones', 'audio', 'smart home', 'accessories', 'Stuffsus', 'ecommerce'],
   authors: [{ name: 'Stuffsus Team' }],
   openGraph: {
     title: 'Stuffsus - Premium Tech Shop',
-    description: 'Discover the latest tech gadgets, mobile phones, audio accessories, and smart home devices at Stuffsus. Give All You Need.',
+    description: 'Discover the latest tech gadgets, mobile phones, audio accessories, and smart home devices at Stuffsus.',
     url: 'https://stuffsus.com',
     siteName: 'Stuffsus',
     images: [

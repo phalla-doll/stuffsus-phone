@@ -172,15 +172,25 @@ export default function ShopSection() {
             ))}
           </div>
         ) : currentProducts.length === 0 ? (
-          <div className="flex flex-col items-center justify-center py-24 text-gray-400 gap-4 bg-white rounded-3xl border border-gray-100 shadow-sm">
+          <div className="flex flex-col items-center justify-center py-24 text-gray-400 gap-4 bg-white rounded-3xl border border-gray-100 shadow-sm px-4 text-center">
             <SearchX className="w-16 h-16 opacity-20" />
             <p className="font-medium text-lg text-gray-900">No products found</p>
-            <p className="text-sm">We couldn't find anything matching "{searchQuery}"</p>
+            <p className="text-sm max-w-md">
+              {searchQuery 
+                ? `We couldn't find anything matching "${searchQuery}"` 
+                : "We couldn't find any products matching your selected filters."}
+            </p>
             <button 
-              onClick={() => setSearchQuery('')} 
+              type="button"
+              onClick={() => {
+                setSearchQuery('');
+                setActiveCategory('All');
+                setActiveBadge('All');
+                setActiveBrand('All');
+              }} 
               className="mt-2 px-6 py-2 bg-black text-white rounded-full font-bold hover:bg-[#FF5E00] transition-colors text-sm"
             >
-              Clear Search
+              Clear All Filters
             </button>
           </div>
         ) : (

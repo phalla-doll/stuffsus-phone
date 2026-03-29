@@ -1,4 +1,4 @@
-import { Search } from 'lucide-react';
+import { Send } from 'lucide-react';
 import Image from 'next/image';
 
 export default function Hero() {
@@ -23,18 +23,16 @@ export default function Hero() {
           <h2 className="text-3xl md:text-4xl font-bold text-white max-w-xs leading-tight">
             Give All You Need
           </h2>
-          <div className="flex-1 max-w-md w-full relative">
-            <div className="absolute inset-y-0 left-4 flex items-center pointer-events-none">
-              <Search className="w-5 h-5 text-gray-400" />
-            </div>
-            <input 
-              type="text" 
-              placeholder="Search on Stuffsus" 
-              className="w-full pl-12 pr-24 py-4 rounded-full bg-white/95 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-[#FF5E00] transition-all text-sm font-medium"
-            />
-            <button className="absolute inset-y-2 right-2 px-6 bg-black text-white rounded-full text-sm font-bold hover:bg-[#FF5E00] transition-colors">
-              Search
-            </button>
+          <div className="flex-1 max-w-md w-full flex sm:justify-end">
+            <a 
+              href="https://t.me/yourchannel" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="px-8 py-4 bg-[#229ED9] text-white rounded-full text-sm md:text-base font-bold hover:bg-[#1c84b5] transition-colors shadow-lg flex items-center gap-2"
+            >
+              <Send className="w-5 h-5" />
+              Join Telegram Channel
+            </a>
           </div>
         </div>
       </div>

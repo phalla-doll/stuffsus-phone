@@ -1,3 +1,5 @@
+import { Send } from 'lucide-react';
+
 export default function Newsletter() {
   return (
     <section className="px-8 mb-24">
@@ -6,21 +8,22 @@ export default function Newsletter() {
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-8 leading-tight">
             Ready to Get<br />Our New Stuff?
           </h2>
-          <div className="flex items-center bg-white rounded-full p-1.5 max-w-md w-full">
-            <input 
-              type="email" 
-              placeholder="Your Email" 
-              className="flex-1 px-6 py-3 bg-transparent focus:outline-none text-gray-900 font-medium"
-            />
-            <button className="px-8 py-3 bg-black text-white rounded-full font-bold hover:bg-[#FF5E00] transition-colors">
-              Send
-            </button>
+          <div className="flex items-center max-w-md w-full">
+            <a 
+              href="https://t.me/yourchannel" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="w-full sm:w-auto px-8 py-4 bg-[#229ED9] text-white rounded-full text-lg font-bold hover:bg-[#1c84b5] transition-colors shadow-lg flex items-center justify-center gap-3"
+            >
+              <Send className="w-6 h-6" />
+              Join Telegram Channel
+            </a>
           </div>
         </div>
         <div className="flex-1 max-w-sm">
-          <h3 className="text-lg font-bold text-white mb-4">Stuffsus for Homes and Needs</h3>
+          <h3 className="text-lg font-bold text-white mb-4">Get Notified on Product Drops</h3>
           <p className="text-gray-400 text-sm leading-relaxed font-medium">
-            We&apos;ll listen to your needs, identify the best approach, and then create a bespoke smart EV charging solution that&apos;s right for you.
+            Join our Telegram channel to be the first to know when new products drop. Don&apos;t miss out on exclusive deals and limited stock items!
           </p>
         </div>
       </div>

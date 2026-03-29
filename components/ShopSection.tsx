@@ -3,7 +3,7 @@
 import { useState, useMemo, useEffect } from 'react';
 import Sidebar from './Sidebar';
 import ProductCard from './ProductCard';
-import { ChevronLeft, ChevronRight, SearchX, ChevronDown } from 'lucide-react';
+import { ChevronLeft, ChevronRight, SearchX, ChevronDown, Search } from 'lucide-react';
 import { useSearch } from '@/context/SearchContext';
 
 const baseProducts = [
@@ -109,11 +109,19 @@ export default function ShopSection() {
         totalProducts={allProducts.length}
       />
       <div className="flex-1 flex flex-col gap-12">
-        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-          <h2 className="text-xl font-bold text-gray-900">
-            {activeCategory === 'All' ? 'All Products' : `${activeCategory} Products`}
-            <span className="text-gray-500 text-sm font-normal ml-2">({sortedProducts.length})</span>
-          </h2>
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 w-full">
+          <div className="relative flex-1 max-w-md w-full">
+            <div className="absolute inset-y-0 left-4 flex items-center pointer-events-none">
+              <Search className="w-5 h-5 text-gray-400" />
+            </div>
+            <input
+              type="text"
+              placeholder="Search products..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="w-full pl-12 pr-4 py-3 rounded-full border border-gray-200 bg-white focus:outline-none focus:ring-2 focus:ring-[#FF5E00] focus:border-transparent transition-all text-sm font-medium text-gray-900"
+            />
+          </div>
           <div className="flex items-center gap-2">
             <label htmlFor="sort" className="text-sm font-medium text-gray-500">Sort by:</label>
             <div className="relative">

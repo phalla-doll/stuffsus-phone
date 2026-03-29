@@ -3,7 +3,7 @@
 import { useState, useMemo, useEffect } from 'react';
 import Sidebar from './Sidebar';
 import ProductCard from './ProductCard';
-import { ChevronLeft, ChevronRight, SearchX } from 'lucide-react';
+import { ChevronLeft, ChevronRight, SearchX, ChevronDown } from 'lucide-react';
 import { useSearch } from '@/context/SearchContext';
 
 const baseProducts = [
@@ -102,17 +102,20 @@ export default function ShopSection() {
           </h2>
           <div className="flex items-center gap-2">
             <label htmlFor="sort" className="text-sm font-medium text-gray-500">Sort by:</label>
-            <select
-              id="sort"
-              value={sortBy}
-              onChange={(e) => setSortBy(e.target.value)}
-              className="bg-white border border-gray-200 text-gray-900 text-sm rounded-full focus:ring-[#FF5E00] focus:border-[#FF5E00] block pl-4 pr-10 py-2 outline-none cursor-pointer transition-colors hover:border-gray-300"
-            >
-              <option value="featured">Featured</option>
-              <option value="price-asc">Price: Low to High</option>
-              <option value="price-desc">Price: High to Low</option>
-              <option value="rating-desc">Highest Rated</option>
-            </select>
+            <div className="relative">
+              <select
+                id="sort"
+                value={sortBy}
+                onChange={(e) => setSortBy(e.target.value)}
+                className="appearance-none bg-white border border-gray-200 text-gray-900 text-sm rounded-full focus:ring-[#FF5E00] focus:border-[#FF5E00] block pl-4 pr-10 py-2 outline-none cursor-pointer transition-colors hover:border-gray-300"
+              >
+                <option value="featured">Featured</option>
+                <option value="price-asc">Price: Low to High</option>
+                <option value="price-desc">Price: High to Low</option>
+                <option value="rating-desc">Highest Rated</option>
+              </select>
+              <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500 pointer-events-none" />
+            </div>
           </div>
         </div>
 

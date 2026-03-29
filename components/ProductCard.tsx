@@ -3,8 +3,10 @@
 import { useState } from 'react';
 import { Star, Eye, X } from 'lucide-react';
 import Image from 'next/image';
+import { useCart } from '@/context/CartContext';
 
 interface ProductCardProps {
+  id: number;
   title: string;
   price: number;
   rating: number;
@@ -13,8 +15,14 @@ interface ProductCardProps {
   imageSeed: string;
 }
 
-export default function ProductCard({ title, price, rating, reviews, category, imageSeed }: ProductCardProps) {
+export default function ProductCard({ id, title, price, rating, reviews, category, imageSeed }: ProductCardProps) {
   const [isQuickViewOpen, setIsQuickViewOpen] = useState(false);
+  const { addToCart } = useCart();
+
+  const handleAddToCart = () => {
+    addToCart({ id, title, price, imageSeed, quantity: 1 });
+    setIsQuickViewOpen(false);
+  };
 
   return (
     <>
@@ -54,10 +62,16 @@ export default function ProductCard({ title, price, rating, reviews, category, i
             <span>({reviews} Reviews)</span>
           </div>
           <div className="flex items-center gap-2 mt-3">
-            <button className="flex-1 py-3 rounded-full border border-gray-300 text-sm font-bold text-gray-700 hover:border-[#FF5E00] hover:text-[#FF5E00] transition-colors bg-white">
-              Add to Chart
+            <button 
+              onClick={handleAddToCart}
+              className="flex-1 py-3 rounded-full border border-gray-300 text-sm font-bold text-gray-700 hover:border-[#FF5E00] hover:text-[#FF5E00] transition-colors bg-white"
+            >
+              Add to Cart
             </button>
-            <button className="flex-1 py-3 rounded-full bg-black text-white text-sm font-bold hover:bg-[#FF5E00] transition-colors shadow-sm shadow-black/5">
+            <button 
+              onClick={handleAddToCart}
+              className="flex-1 py-3 rounded-full bg-black text-white text-sm font-bold hover:bg-[#FF5E00] transition-colors shadow-sm shadow-black/5"
+            >
               Buy Now
             </button>
           </div>
@@ -119,7 +133,10 @@ export default function ProductCard({ title, price, rating, reviews, category, i
               <div className="mt-auto pt-8 border-t border-gray-100">
                 <div className="text-4xl font-black text-gray-900 mb-6">${price.toFixed(2)}</div>
                 <div className="flex gap-4">
-                  <button className="flex-1 py-4 rounded-full bg-black text-white font-bold hover:bg-[#FF5E00] transition-colors shadow-sm shadow-black/5 text-lg">
+                  <button 
+                    onClick={handleAddToCart}
+                    className="flex-1 py-4 rounded-full bg-black text-white font-bold hover:bg-[#FF5E00] transition-colors shadow-sm shadow-black/5 text-lg"
+                  >
                     Add to Cart
                   </button>
                 </div>

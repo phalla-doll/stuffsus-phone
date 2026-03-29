@@ -1,5 +1,7 @@
 import type {Metadata} from 'next';
 import './globals.css'; // Global styles
+import { CartProvider } from '@/context/CartContext';
+import Cart from '@/components/Cart';
 
 export const metadata: Metadata = {
   title: 'Stuffsus - Tech Shop',
@@ -13,7 +15,10 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
         <link href="https://api.fontshare.com/v2/css?f[]=satoshi@900,700,500,300,400&display=swap" rel="stylesheet" />
       </head>
       <body className="font-satoshi bg-[#F5F5F5] text-gray-900" suppressHydrationWarning>
-        {children}
+        <CartProvider>
+          {children}
+          <Cart />
+        </CartProvider>
       </body>
     </html>
   );

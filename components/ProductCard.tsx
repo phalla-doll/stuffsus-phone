@@ -19,7 +19,7 @@ export default function ProductCard({ title, price, rating, reviews, category, i
   return (
     <>
       <div className="group flex flex-col gap-4">
-        <div className="relative aspect-square rounded-3xl bg-[#EBEBEB] p-6 flex items-center justify-center overflow-hidden transition-transform group-hover:scale-[1.02]">
+        <div className="relative aspect-square rounded-3xl bg-[#EBEBEB] flex items-center justify-center overflow-hidden transition-transform group-hover:scale-[1.02]">
           <span className="absolute top-4 right-4 px-4 py-1.5 bg-white/90 backdrop-blur-sm rounded-full text-[10px] font-bold uppercase tracking-wider text-gray-800 z-10 shadow-sm">
             {category}
           </span>
@@ -75,7 +75,7 @@ export default function ProductCard({ title, price, rating, reviews, category, i
             onClick={e => e.stopPropagation()}
           >
             {/* Image Side */}
-            <div className="w-full md:w-1/2 bg-[#EBEBEB] p-8 md:p-12 flex items-center justify-center relative min-h-[300px] md:min-h-[500px]">
+            <div className="w-full md:w-1/2 bg-[#EBEBEB] flex items-center justify-center relative min-h-[300px] md:min-h-[500px]">
               <div className="relative w-full h-full mix-blend-multiply drop-shadow-md">
                 <Image 
                   src={`https://picsum.photos/seed/${imageSeed}/800/800`} 

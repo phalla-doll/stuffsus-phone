@@ -134,26 +134,28 @@ export default function Sidebar({
             <li>
               <button 
                 onClick={() => onBrandChange('All')}
-                className={`w-full flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium transition-all ${
+                className={`w-full flex items-center justify-between px-4 py-2.5 rounded-xl text-sm font-medium transition-all ${
                   activeBrand === 'All' 
                     ? 'bg-[#FF5E00]/10 text-[#FF5E00] font-bold' 
                     : 'text-gray-500 hover:text-[#FF5E00]'
                 }`}
               >
                 All Brands
+                {activeBrand === 'All' && <div className="w-1.5 h-1.5 rounded-full bg-[#FF5E00]" />}
               </button>
             </li>
             {brands.map(brand => (
               <li key={brand}>
                 <button 
                   onClick={() => onBrandChange(brand)}
-                  className={`w-full flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium transition-all ${
+                  className={`w-full flex items-center justify-between px-4 py-2.5 rounded-xl text-sm font-medium transition-all ${
                     activeBrand === brand 
                       ? 'bg-[#FF5E00]/10 text-[#FF5E00] font-bold' 
                       : 'text-gray-500 hover:text-[#FF5E00]'
                   }`}
                 >
                   {brand}
+                  {activeBrand === brand && <div className="w-1.5 h-1.5 rounded-full bg-[#FF5E00]" />}
                 </button>
               </li>
             ))}

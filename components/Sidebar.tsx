@@ -107,7 +107,7 @@ export default function Sidebar({
             onClick={() => onBadgeChange(activeBadge === badge.id ? 'All' : badge.id)}
             className={`w-full flex items-center justify-between px-4 py-2.5 text-sm font-medium transition-colors rounded-xl ${
               activeBadge === badge.id
-                ? 'bg-gray-100 text-gray-900 font-bold'
+                ? 'bg-[#FF5E00]/10 text-[#FF5E00] font-bold'
                 : 'text-gray-600 hover:text-[#FF5E00]'
             }`}
           >
@@ -136,7 +136,7 @@ export default function Sidebar({
                 onClick={() => onBrandChange('All')}
                 className={`w-full flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium transition-all ${
                   activeBrand === 'All' 
-                    ? 'bg-gray-100 text-gray-900 font-bold' 
+                    ? 'bg-[#FF5E00]/10 text-[#FF5E00] font-bold' 
                     : 'text-gray-500 hover:text-[#FF5E00]'
                 }`}
               >
@@ -149,7 +149,7 @@ export default function Sidebar({
                   onClick={() => onBrandChange(brand)}
                   className={`w-full flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium transition-all ${
                     activeBrand === brand 
-                      ? 'bg-gray-100 text-gray-900 font-bold' 
+                      ? 'bg-[#FF5E00]/10 text-[#FF5E00] font-bold' 
                       : 'text-gray-500 hover:text-[#FF5E00]'
                   }`}
                 >

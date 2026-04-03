@@ -32,7 +32,7 @@ export default function Header() {
           {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
         </button>
         {/* Logo icon placeholder */}
-        <div className="w-5 h-5 md:w-6 md:h-6 bg-black rounded-sm transform rotate-45 ml-2 md:ml-0"></div>
+        <div className="w-5 h-5 md:w-6 md:h-6 bg-[#FF5E00] rounded-sm transform rotate-45 ml-2 md:ml-0"></div>
         <span className="text-lg md:text-xl font-bold tracking-tight">Stuffsus</span>
       </div>
       <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-gray-600">

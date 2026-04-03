@@ -2,6 +2,7 @@ import Header from '@/components/Header';
 import Hero from '@/components/Hero';
 import ShopSection from '@/components/ShopSection';
 import Recommendations from '@/components/Recommendations';
+import Testimonials from '@/components/Testimonials';
 import Newsletter from '@/components/Newsletter';
 import Footer from '@/components/Footer';
 
@@ -12,6 +13,7 @@ export default function Home() {
       <Hero />
       <Recommendations />
       <ShopSection />
+      <Testimonials />
       <Newsletter />
       <Footer />
     </main>

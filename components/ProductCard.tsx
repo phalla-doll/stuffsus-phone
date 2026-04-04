@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Star, Eye, X } from 'lucide-react';
 import Image from 'next/image';
 import { useCart } from '@/context/CartContext';
@@ -22,10 +22,48 @@ export default function ProductCard({ id, title, price, rating, reviews, categor
   const [isQuickViewOpen, setIsQuickViewOpen] = useState(false);
   const { addToCart } = useCart();
 
+  useEffect(() => {
+    const handleHashChange = () => {
+      const isOpen = window.location.hash === `#product-${id}`;
+      
+      if (isQuickViewOpen === isOpen) return;
+
+      if (!('startViewTransition' in document)) {
+        setIsQuickViewOpen(isOpen);
+        return;
+      }
+
+      (document as any).startViewTransition(() => {
+        setIsQuickViewOpen(isOpen);
+      });
+    };
+
+    handleHashChange();
+
+    window.addEventListener('hashchange', handleHashChange);
+    return () => window.removeEventListener('hashchange', handleHashChange);
+  }, [id, isQuickViewOpen]);
+
+  const openQuickView = () => {
+    window.location.hash = `product-${id}`;
+  };
+
+  const closeQuickView = () => {
+    history.pushState("", document.title, window.location.pathname + window.location.search);
+    
+    if (!('startViewTransition' in document)) {
+      setIsQuickViewOpen(false);
+      return;
+    }
+    (document as any).startViewTransition(() => {
+      setIsQuickViewOpen(false);
+    });
+  };
+
   const handleAddToCart = () => {
     if (isOutOfStock) return;
     addToCart({ id, title, price, originalPrice, imageSeed, quantity: 1 });
-    setIsQuickViewOpen(false);
+    closeQuickView();
   };
 
   return (
@@ -33,7 +71,8 @@ export default function ProductCard({ id, title, price, rating, reviews, categor
       <div className="group flex flex-col gap-4 h-full">
         <div 
           className="relative aspect-square rounded-3xl bg-[#EBEBEB] flex items-center justify-center overflow-hidden isolate transition-transform group-hover:scale-[1.02] cursor-pointer shrink-0"
-          onClick={() => setIsQuickViewOpen(true)}
+          onClick={openQuickView}
+          style={{ viewTransitionName: isQuickViewOpen ? 'none' : `product-bg-${id}` } as any}
         >
           {!isOutOfStock && (
             <span className="absolute top-4 right-4 px-4 py-1.5 bg-white/90 backdrop-blur-sm rounded-full text-[10px] font-bold uppercase tracking-wider text-[#FF5E00] z-10 shadow-sm">
@@ -57,7 +96,10 @@ export default function ProductCard({ id, title, price, rating, reviews, categor
             <Eye className="w-5 h-5" />
           </button>
 
-          <div className="relative w-full h-full mix-blend-multiply drop-shadow-sm transition-transform group-hover:scale-110 duration-500">
+          <div 
+            className="relative w-full h-full mix-blend-multiply drop-shadow-sm transition-transform group-hover:scale-110 duration-500"
+            style={{ viewTransitionName: isQuickViewOpen ? 'none' : `product-image-${id}` } as any}
+          >
             <Image 
               src={`https://picsum.photos/seed/${imageSeed}/400/400`} 
               alt={title} 
@@ -119,7 +161,7 @@ export default function ProductCard({ id, title, price, rating, reviews, categor
       {isQuickViewOpen && (
         <div 
           className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/60 backdrop-blur-sm"
-          onClick={() => setIsQuickViewOpen(false)}
+          onClick={closeQuickView}
         >
           <div 
             className="bg-white rounded-[2rem] w-full max-w-6xl overflow-hidden flex flex-col md:flex-row shadow-2xl max-h-[90vh] relative"
@@ -127,7 +169,7 @@ export default function ProductCard({ id, title, price, rating, reviews, categor
           >
             {/* Close button for mobile (moved outside content area for better reachability) */}
             <button 
-              onClick={() => setIsQuickViewOpen(false)} 
+              onClick={closeQuickView} 
               className="md:hidden absolute top-4 right-4 p-2 text-gray-900 bg-white/90 backdrop-blur-sm hover:bg-white rounded-full transition-colors z-50 shadow-sm"
               aria-label="Close modal"
             >
@@ -135,8 +177,14 @@ export default function ProductCard({ id, title, price, rating, reviews, categor
             </button>
 
             {/* Image Side */}
-            <div className="w-full md:w-1/2 bg-[#EBEBEB] flex items-center justify-center relative min-h-[250px] sm:min-h-[300px] md:min-h-[500px]">
-              <div className="relative w-full h-full mix-blend-multiply drop-shadow-md">
+            <div 
+              className="w-full md:w-1/2 bg-[#EBEBEB] flex items-center justify-center relative min-h-[250px] sm:min-h-[300px] md:min-h-[500px]"
+              style={{ viewTransitionName: `product-bg-${id}` } as any}
+            >
+              <div 
+                className="relative w-full h-full mix-blend-multiply drop-shadow-md"
+                style={{ viewTransitionName: `product-image-${id}` } as any}
+              >
                 <Image 
                   src={`https://picsum.photos/seed/${imageSeed}/800/800`} 
                   alt={title} 
@@ -150,7 +198,7 @@ export default function ProductCard({ id, title, price, rating, reviews, categor
             {/* Content Side */}
             <div className="w-full md:w-1/2 p-6 sm:p-8 md:p-12 flex flex-col relative overflow-y-auto">
               <button 
-                onClick={() => setIsQuickViewOpen(false)} 
+                onClick={closeQuickView} 
                 className="hidden md:flex absolute top-6 right-6 p-2.5 text-gray-400 hover:text-gray-900 bg-gray-100 hover:bg-gray-200 rounded-full transition-colors z-10"
                 aria-label="Close modal"
               >

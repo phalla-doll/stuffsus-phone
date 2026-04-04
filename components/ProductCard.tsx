@@ -43,10 +43,9 @@ export default function ProductCard({ id, title, price, rating, reviews, categor
   };
 
   const closeQuickView = () => {
+    setIsQuickViewOpen(false);
     if (window.location.hash === `#product-${instanceId}`) {
-      window.location.hash = '';
-    } else {
-      setIsQuickViewOpen(false);
+      window.history.replaceState(null, '', window.location.pathname + window.location.search);
     }
   };
 

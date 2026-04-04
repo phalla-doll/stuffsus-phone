@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { flushSync } from 'react-dom';
 import { Star, Eye, X } from 'lucide-react';
 import Image from 'next/image';
 import { useCart } from '@/context/CartContext';
@@ -34,7 +35,9 @@ export default function ProductCard({ id, title, price, rating, reviews, categor
       }
 
       (document as any).startViewTransition(() => {
-        setIsQuickViewOpen(isOpen);
+        flushSync(() => {
+          setIsQuickViewOpen(isOpen);
+        });
       });
     };
 
@@ -49,15 +52,19 @@ export default function ProductCard({ id, title, price, rating, reviews, categor
   };
 
   const closeQuickView = () => {
-    history.pushState("", document.title, window.location.pathname + window.location.search);
-    
-    if (!('startViewTransition' in document)) {
-      setIsQuickViewOpen(false);
-      return;
+    if (window.location.hash === `#product-${id}`) {
+      window.location.hash = '';
+    } else {
+      if (!('startViewTransition' in document)) {
+        setIsQuickViewOpen(false);
+        return;
+      }
+      (document as any).startViewTransition(() => {
+        flushSync(() => {
+          setIsQuickViewOpen(false);
+        });
+      });
     }
-    (document as any).startViewTransition(() => {
-      setIsQuickViewOpen(false);
-    });
   };
 
   const handleAddToCart = () => {

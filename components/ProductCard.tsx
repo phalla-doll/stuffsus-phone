@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useId } from 'react';
 import { flushSync } from 'react-dom';
 import { Star, Eye, X } from 'lucide-react';
 import Image from 'next/image';
@@ -22,10 +22,11 @@ interface ProductCardProps {
 export default function ProductCard({ id, title, price, rating, reviews, category, imageSeed, badge, isOutOfStock = false, originalPrice }: ProductCardProps) {
   const [isQuickViewOpen, setIsQuickViewOpen] = useState(false);
   const { addToCart } = useCart();
+  const instanceId = useId().replace(/:/g, '');
 
   useEffect(() => {
     const handleHashChange = () => {
-      const isOpen = window.location.hash === `#product-${id}`;
+      const isOpen = window.location.hash === `#product-${instanceId}`;
       
       if (isQuickViewOpen === isOpen) return;
 
@@ -45,14 +46,14 @@ export default function ProductCard({ id, title, price, rating, reviews, categor
 
     window.addEventListener('hashchange', handleHashChange);
     return () => window.removeEventListener('hashchange', handleHashChange);
-  }, [id, isQuickViewOpen]);
+  }, [instanceId, isQuickViewOpen]);
 
   const openQuickView = () => {
-    window.location.hash = `product-${id}`;
+    window.location.hash = `product-${instanceId}`;
   };
 
   const closeQuickView = () => {
-    if (window.location.hash === `#product-${id}`) {
+    if (window.location.hash === `#product-${instanceId}`) {
       window.location.hash = '';
     } else {
       if (!('startViewTransition' in document)) {
@@ -79,7 +80,7 @@ export default function ProductCard({ id, title, price, rating, reviews, categor
         <div 
           className="relative aspect-square rounded-3xl bg-[#EBEBEB] flex items-center justify-center overflow-hidden isolate transition-transform group-hover:scale-[1.02] cursor-pointer shrink-0"
           onClick={openQuickView}
-          style={{ viewTransitionName: isQuickViewOpen ? 'none' : `product-bg-${id}` } as any}
+          style={{ viewTransitionName: isQuickViewOpen ? 'none' : `product-bg-${instanceId}` } as any}
         >
           {!isOutOfStock && (
             <span className="absolute top-4 right-4 px-4 py-1.5 bg-white/90 backdrop-blur-sm rounded-full text-[10px] font-bold uppercase tracking-wider text-[#FF5E00] z-10 shadow-sm">
@@ -105,7 +106,7 @@ export default function ProductCard({ id, title, price, rating, reviews, categor
 
           <div 
             className="relative w-full h-full mix-blend-multiply drop-shadow-sm transition-transform group-hover:scale-110 duration-500"
-            style={{ viewTransitionName: isQuickViewOpen ? 'none' : `product-image-${id}` } as any}
+            style={{ viewTransitionName: isQuickViewOpen ? 'none' : `product-image-${instanceId}` } as any}
           >
             <Image 
               src={`https://picsum.photos/seed/${imageSeed}/400/400`} 
@@ -186,11 +187,11 @@ export default function ProductCard({ id, title, price, rating, reviews, categor
             {/* Image Side */}
             <div 
               className="w-full md:w-1/2 bg-[#EBEBEB] flex items-center justify-center relative min-h-[250px] sm:min-h-[300px] md:min-h-[500px]"
-              style={{ viewTransitionName: `product-bg-${id}` } as any}
+              style={{ viewTransitionName: `product-bg-${instanceId}` } as any}
             >
               <div 
                 className="relative w-full h-full mix-blend-multiply drop-shadow-md"
-                style={{ viewTransitionName: `product-image-${id}` } as any}
+                style={{ viewTransitionName: `product-image-${instanceId}` } as any}
               >
                 <Image 
                   src={`https://picsum.photos/seed/${imageSeed}/800/800`} 

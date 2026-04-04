@@ -104,15 +104,13 @@ export default function ProductCard({ id, title, price, rating, reviews, categor
             <Eye className="w-5 h-5" />
           </button>
 
-          <div 
-            className="relative w-full h-full mix-blend-multiply drop-shadow-sm transition-transform group-hover:scale-110 duration-500"
-            style={{ viewTransitionName: isQuickViewOpen ? 'none' : `product-image-${instanceId}` } as any}
-          >
+          <div className="relative w-full h-full mix-blend-multiply drop-shadow-sm transition-transform group-hover:scale-110 duration-500">
             <Image 
               src={`https://picsum.photos/seed/${imageSeed}/400/400`} 
               alt={title} 
               fill
               className="object-cover"
+              style={{ viewTransitionName: isQuickViewOpen ? 'none' : `product-image-${instanceId}` } as any}
               referrerPolicy="no-referrer"
             />
           </div>
@@ -186,18 +184,16 @@ export default function ProductCard({ id, title, price, rating, reviews, categor
 
             {/* Image Side */}
             <div 
-              className="w-full md:w-1/2 bg-[#EBEBEB] flex items-center justify-center relative min-h-[250px] sm:min-h-[300px] md:min-h-[500px]"
+              className="w-full md:w-1/2 bg-[#EBEBEB] flex items-center justify-center relative min-h-[250px] sm:min-h-[300px] md:min-h-[500px] rounded-t-[2rem] md:rounded-none md:rounded-l-[2rem] overflow-hidden"
               style={{ viewTransitionName: `product-bg-${instanceId}` } as any}
             >
-              <div 
-                className="relative w-full h-full mix-blend-multiply drop-shadow-md"
-                style={{ viewTransitionName: `product-image-${instanceId}` } as any}
-              >
+              <div className="relative w-full h-full mix-blend-multiply drop-shadow-md">
                 <Image 
                   src={`https://picsum.photos/seed/${imageSeed}/800/800`} 
                   alt={title} 
                   fill
                   className="object-cover"
+                  style={{ viewTransitionName: `product-image-${instanceId}` } as any}
                   referrerPolicy="no-referrer"
                 />
               </div>

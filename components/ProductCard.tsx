@@ -1,7 +1,6 @@
 'use client';
 
 import { useState, useEffect, useId } from 'react';
-import { flushSync } from 'react-dom';
 import { Star, Eye, X } from 'lucide-react';
 import Image from 'next/image';
 import { useCart } from '@/context/CartContext';
@@ -28,18 +27,9 @@ export default function ProductCard({ id, title, price, rating, reviews, categor
     const handleHashChange = () => {
       const isOpen = window.location.hash === `#product-${instanceId}`;
       
-      if (isQuickViewOpen === isOpen) return;
-
-      if (!('startViewTransition' in document)) {
+      if (isQuickViewOpen !== isOpen) {
         setIsQuickViewOpen(isOpen);
-        return;
       }
-
-      (document as any).startViewTransition(() => {
-        flushSync(() => {
-          setIsQuickViewOpen(isOpen);
-        });
-      });
     };
 
     handleHashChange();
@@ -56,15 +46,7 @@ export default function ProductCard({ id, title, price, rating, reviews, categor
     if (window.location.hash === `#product-${instanceId}`) {
       window.location.hash = '';
     } else {
-      if (!('startViewTransition' in document)) {
-        setIsQuickViewOpen(false);
-        return;
-      }
-      (document as any).startViewTransition(() => {
-        flushSync(() => {
-          setIsQuickViewOpen(false);
-        });
-      });
+      setIsQuickViewOpen(false);
     }
   };
 
@@ -80,7 +62,6 @@ export default function ProductCard({ id, title, price, rating, reviews, categor
         <div 
           className="relative aspect-square rounded-3xl bg-[#EBEBEB] flex items-center justify-center overflow-hidden isolate transition-transform group-hover:scale-[1.02] cursor-pointer shrink-0"
           onClick={openQuickView}
-          style={{ viewTransitionName: isQuickViewOpen ? 'none' : `product-bg-${instanceId}` } as any}
         >
           {!isOutOfStock && (
             <span className="absolute top-4 right-4 px-4 py-1.5 bg-white/90 backdrop-blur-sm rounded-full text-[10px] font-bold uppercase tracking-wider text-[#FF5E00] z-10 shadow-sm">
@@ -110,7 +91,6 @@ export default function ProductCard({ id, title, price, rating, reviews, categor
               alt={title} 
               fill
               className="object-cover"
-              style={{ viewTransitionName: isQuickViewOpen ? 'none' : `product-image-${instanceId}` } as any}
               referrerPolicy="no-referrer"
             />
           </div>
@@ -183,17 +163,13 @@ export default function ProductCard({ id, title, price, rating, reviews, categor
             </button>
 
             {/* Image Side */}
-            <div 
-              className="w-full md:w-1/2 bg-[#EBEBEB] flex items-center justify-center relative min-h-[250px] sm:min-h-[300px] md:min-h-[500px] rounded-t-[2rem] md:rounded-none md:rounded-l-[2rem] overflow-hidden"
-              style={{ viewTransitionName: `product-bg-${instanceId}` } as any}
-            >
+            <div className="w-full md:w-1/2 bg-[#EBEBEB] flex items-center justify-center relative min-h-[250px] sm:min-h-[300px] md:min-h-[500px] rounded-t-[2rem] md:rounded-none md:rounded-l-[2rem] overflow-hidden">
               <div className="relative w-full h-full mix-blend-multiply drop-shadow-md">
                 <Image 
                   src={`https://picsum.photos/seed/${imageSeed}/800/800`} 
                   alt={title} 
                   fill
                   className="object-cover"
-                  style={{ viewTransitionName: `product-image-${instanceId}` } as any}
                   referrerPolicy="no-referrer"
                 />
               </div>
